@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
     entry: "./src/index.js",
@@ -27,8 +26,6 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "public/"),
         port: 9000,
-        publicPath: "http://localhost:9000/dist/",
-        hotOnly: true
-    },
-    plugins: [new webpack.HotModuleReplacementPlugin()]
+        publicPath: "http://localhost:9000/dist/"
+    }
 };

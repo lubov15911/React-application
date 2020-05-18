@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
+import React from 'react';
 
-import './App.css';
+import { SearchPanel } from './SearchPanel.js'; // Functional component + Pure Component
+import { SearchResults } from './SearchResults.js'; // Component
 
-class App extends Component {
-    render(){
-        return(
-            <div className='App'>
-                <h1> Hello, World! </h1>
-            </div>
-        );
-    }
-}
-
-export default hot(module)(App);
+export let App = React.createElement(
+    'div',
+    {
+        className: 'app'
+    },
+    <h1> Hello, World! </h1>,
+    <SearchPanel />,
+    <SearchResults />
+);
