@@ -3,6 +3,8 @@ import React from 'react';
 import { SearchPanel } from './SearchPanel.js'; // Functional component + Pure Component
 import { SearchResults } from './SearchResults.js'; // Component
 
+import './App.css';
+
 export let App = React.createElement(
     'div',
     {
