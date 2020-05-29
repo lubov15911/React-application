@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import { Sum } from './TestComponent'; // Component for test
+import Sum from './TestComponent'; // Component for test
 
-export class SearchResults extends Component {
+export default class SearchResults extends Component {
     render() {
         return (
             <div>
-                <p>{Sum(11, 6)} movies found</p>
-                <p>Sort by</p>
+              <p>{Sum(11, 6)} movies found</p>
+              <p>Sort by</p>
             </div>
         );
     }
