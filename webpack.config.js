@@ -4,6 +4,18 @@ const merge = require("webpack-merge");
 const Config = require('./defaultWebpackConfig');
 
 module.exports = merge(Config, {
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            }
+        ]
+    },
     watch: true,
     devtool: "source-map",
     devServer: {
