@@ -30,7 +30,7 @@ export default class SearchHeader extends React.Component {
 
     render() {
         return (
-            <div className="search-bar">
+            <div className="search-header">
                 <h1 className="search-title">Find your movie</h1>
                 <SearchBar handleSubmit={this.sendSearchRequest} />
                 <ToggleComponent
