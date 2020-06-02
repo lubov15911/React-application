@@ -21,11 +21,15 @@ export default class SearchHeader extends React.Component {
     }
 
     toggleSearch() {
-        let newValue = (this.state.searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
+        const {
+            searchOption
+        } = this.state;
+        const newValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
         this.setState({ searchOption: newValue });
     }
 
     sendSearchRequest(value) {
+        // eslint-disable-next-line no-console
         console.log('Send Search Request', value);
         if (value === 'error') {
             this.setState({ error: true });
@@ -35,7 +39,12 @@ export default class SearchHeader extends React.Component {
     }
 
     render() {
-        if (this.state.error) {
+        const {
+            searchOption,
+            error,
+        } = this.state;
+
+        if (error) {
             throw new Error('I crashed!');
         } else {
             return (
@@ -45,7 +54,7 @@ export default class SearchHeader extends React.Component {
                     <ToggleComponent
                         toggleType='Search'
                         options={SearchOptions}
-                        selected={this.state.searchOption}
+                        selected={searchOption}
                         handleToggle={this.toggleSearch} />
                 </div>
             );

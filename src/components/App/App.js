@@ -19,31 +19,46 @@ export default class App extends React.PureComponent {
         this.getMoveData = this.getMoveData.bind(this);
     }
 
-    goToMoviePage(movieId) {
-        console.log('goToMoviePage', movieId);
-        this.setState({ movieId });
+    getMoveData() {
+        const { movieId } = this.state;
+        if (!movieId) {
+            return null;
+        }
+        return Films.data.find(item => {
+            return item.id === movieId;
+        });
     }
 
     goToSearchPage() {
         this.setState({ movieId: '' });
     }
 
-    getMoveData() {
-        if (!this.state.movieId) {
-            return null;
-        } else {
-            return Films.data.find(item => {
-                return item.id === this.state.movieId;
-            });
-        }
+    goToMoviePage(movieId) {
+        // eslint-disable-next-line no-console
+        console.log('goToMoviePage', movieId);
+        this.setState({ movieId });
     }
 
     render() {
+        const {
+            movieId,
+            error,
+        } = this.state;
+
         return (
             <div className="app">
-                <HeaderContainer movieId={this.state.movieId} movie={this.getMoveData()} routeToHomePage={this.goToSearchPage} error={this.state.error} />
+                <HeaderContainer
+                    movieId={movieId}
+                    movie={this.getMoveData()}
+                    routeToHomePage={this.goToSearchPage}
+                    error={error}
+                />
                 <ErrorBoundary>
-                    <SearchResultsContainer total={Films.data.length} films={Films.data} raiseClickEvent={this.goToMoviePage} />
+                    <SearchResultsContainer
+                        total={Films.data.length}
+                        films={Films.data}
+                        raiseClickEvent={this.goToMoviePage}
+                    />
                 </ErrorBoundary>
             </div>
         );

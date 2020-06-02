@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -7,28 +8,41 @@ export default class ErrorBoundary extends React.Component {
     }
 
     componentDidCatch(error, errorInfo) {
+        // eslint-disable-next-line no-console
         console.log('componentDidCatch');
         this.setState({
-            error: error,
-            errorInfo: errorInfo
+            error,
+            errorInfo,
         })
     }
 
     render() {
-        console.log('Render NO error');
-        if (this.state.errorInfo) {
+        const {
+            errorInfo,
+            error
+        } = this.state;
+        const { children } = this.props;
+
+        if (errorInfo) {
+            // eslint-disable-next-line no-console
             console.log('Render error');
             return (
                 <div>
                     <h2>Something went wrong.</h2>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
-                        {this.state.error && this.state.error.toString()}
+                        {error && error.toString()}
                         <br />
-                        {this.state.errorInfo.componentStack}
+                        {errorInfo.componentStack}
                     </details>
                 </div>
             );
         }
-        return this.props.children;
+        return children;
     }
 }
+ErrorBoundary.propTypes = {
+    children:  PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+};

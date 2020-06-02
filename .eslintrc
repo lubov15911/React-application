@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "rules":{
     "linebreak-style": ["error", "windows"],
     "indent": [2, 4, {"SwitchCase": 1}],

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './MovieCard.scss';
 
 const MovieCard = (props) => {
-    let movie = props.movie;
+    const { movie } = props;
 
     return (
         <div className="movie-card">
@@ -22,6 +23,17 @@ const MovieCard = (props) => {
             </div>
         </div>
     );
+};
+MovieCard.propTypes = {
+    movie: PropTypes.shape({
+        poster_path: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        vote_average: PropTypes.number.isRequired,
+        release_date: PropTypes.string.isRequired,
+        tagline: PropTypes.string.isRequired,
+        runtime: PropTypes.number.isRequired,
+        overview: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default MovieCard;

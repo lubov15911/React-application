@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './SearchBar.scss';
 
@@ -10,21 +11,29 @@ export default class SearchBar extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    onSubmit(event) {
+        const { handleSubmit } = this.props;
+        const {
+            value,
+        } = this.state;
+        handleSubmit(value);
+        event.preventDefault();
+    }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
-    onSubmit(event) {
-        this.props.handleSubmit(this.state.value);
-        event.preventDefault();
-    }
-
     render() {
+        const { value } = this.state;
         return (
             <form className="search-form" onSubmit={this.onSubmit}>
-                <input type="text" placeholder="Search" value={this.state.value} onChange={this.handleChange} />
+                <input type="text" placeholder="Search" value={value} onChange={this.handleChange} />
                 <button type="submit"><p>Search</p></button>
             </form>
         );
     }
+};
+SearchBar.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
 };

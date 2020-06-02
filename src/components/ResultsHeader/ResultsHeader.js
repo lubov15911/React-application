@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ToggleComponent from '../ToggleComponent/ToggleComponent';
 
@@ -19,22 +20,31 @@ export default class ResultsHeader extends React.Component {
     }
 
     toggleSort() {
-        let newValue = (this.state.sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
+        const { sortOption } = this.state;
+        const { handleSortOption } = this.props;
+        const newValue = (sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
         this.setState({ sortOption: newValue });
-        this.props.handleSortOption(newValue);
+        handleSortOption(newValue);
     }
 
     render() {
+        const { totalResults } = this.props;
+        const { sortOption } = this.state;
+
         return (
             <div className="results-header">
-                {this.props.totalResults && <p><b>{this.props.totalResults} movie found</b></p>}
+                {totalResults && <p><b>{totalResults} movie found</b></p>}
                 <ToggleComponent
                     className="toggle1"
                     toggleType='Sort'
                     options={SortOptions}
-                    selected={this.state.sortOption}
+                    selected={sortOption}
                     handleToggle={this.toggleSort} />
             </div>
         );
     }
 }
+ResultsHeader.propTypes = {
+    totalResults: PropTypes.number.isRequired,
+    handleSortOption: PropTypes.func.isRequired,
+};
