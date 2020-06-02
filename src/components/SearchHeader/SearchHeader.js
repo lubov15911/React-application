@@ -13,7 +13,8 @@ export default class SearchHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchOption: SearchOptions.first
+            searchOption: SearchOptions.first,
+            error: false
         };
         this.toggleSearch = this.toggleSearch.bind(this);
         this.sendSearchRequest = this.sendSearchRequest.bind(this);
@@ -26,19 +27,28 @@ export default class SearchHeader extends React.Component {
 
     sendSearchRequest(value) {
         console.log('Send Search Request', value);
+        if (value === 'error') {
+            this.setState({ error: true });
+        } else {
+            this.setState({ error: false });
+        }
     }
 
     render() {
-        return (
-            <div className="search-header">
-                <h1 className="search-title">Find your movie</h1>
-                <SearchBar handleSubmit={this.sendSearchRequest} />
-                <ToggleComponent
-                    toggleType='Search'
-                    options={SearchOptions}
-                    selected={this.state.searchOption}
-                    handleToggle={this.toggleSearch} />
-            </div>
-        );
+        if (this.state.error) {
+            throw new Error('I crashed!');
+        } else {
+            return (
+                <div className="search-header">
+                    <h1 className="search-title">Find your movie</h1>
+                    <SearchBar handleSubmit={this.sendSearchRequest} />
+                    <ToggleComponent
+                        toggleType='Search'
+                        options={SearchOptions}
+                        selected={this.state.searchOption}
+                        handleToggle={this.toggleSearch} />
+                </div>
+            );
+        }
     }
 };

@@ -2,6 +2,7 @@ import React from 'react';
 
 import HeaderContainer from "../HeaderContainer/HeaderCondainer";
 import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 import './App.scss';
 
@@ -40,8 +41,10 @@ export default class App extends React.PureComponent {
     render() {
         return (
             <div className="app">
-                <HeaderContainer movieId={this.state.movieId} movie={this.getMoveData()} routeToHomePage={this.goToSearchPage}/>
-                <SearchResultsContainer total={Films.data.length} films={Films.data} raiseClickEvent={this.goToMoviePage} />
+                <HeaderContainer movieId={this.state.movieId} movie={this.getMoveData()} routeToHomePage={this.goToSearchPage} error={this.state.error} />
+                <ErrorBoundary>
+                    <SearchResultsContainer total={Films.data.length} films={Films.data} raiseClickEvent={this.goToMoviePage} />
+                </ErrorBoundary>
             </div>
         );
     }

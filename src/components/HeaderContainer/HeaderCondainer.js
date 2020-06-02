@@ -4,6 +4,7 @@ import HomePageLogoButton from '../HomePageLogoButton/HomePageLogoButton';
 import HomePageSearchButton from '../HomePageSearchButton/HomePageSearchButton';
 import SearchHeader from '../SearchHeader/SearchHeader';
 import MovieCard from '../MovieCard/MovieCard';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import './HeaderContainer.scss';
 
 const HeaderContainer = (props) => {
@@ -13,7 +14,7 @@ const HeaderContainer = (props) => {
                 <HomePageLogoButton handleClick={props.routeToHomePage} />
                 {props.movieId && <HomePageSearchButton handleClick={props.routeToHomePage} />}
             </div>
-            {!props.movieId ? <SearchHeader /> : <MovieCard movie={props.movie}/>}
+            {!props.movieId ? <ErrorBoundary><SearchHeader error={props.error}/></ErrorBoundary> : <MovieCard movie={props.movie}/>}
         </div>
     );
 };
