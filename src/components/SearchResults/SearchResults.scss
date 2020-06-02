@@ -1,0 +1,10 @@
+.search-results {
+  padding: 6em;
+  min-height: 55.5em;
+
+  &.no-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

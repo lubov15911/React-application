@@ -1,0 +1,10 @@
+.header-container {
+  background: #232323;
+  display: flex;
+  flex-direction: column;
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

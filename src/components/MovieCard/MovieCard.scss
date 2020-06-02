@@ -1,0 +1,40 @@
+.movie-card {
+  display: flex;
+
+  .movie-card-poster {
+    width: 28em;
+  }
+
+  .movie-card-info {
+    .movie-card-info-header {
+      display: flex;
+
+      .movie-card-info-title {
+        font-size: 5em;
+        font-weight: normal;
+      }
+
+      .movie-card-info-rating {
+        border: 0.1em white solid;
+        border-radius: 50%;
+        color: #a1e66f;
+        opacity: 0.8;
+        font-size: 4em;
+        font-weight: normal;
+      }
+    }
+
+    .movie-card-info-tagline {
+      font-size: 1.4em;
+    }
+
+    .movie-card-highlight {
+      color: #f65261;
+      font-size: 2.4em;
+    }
+
+    .movie-card-description {
+      font-size: 1.7em;
+    }
+  }
+}
