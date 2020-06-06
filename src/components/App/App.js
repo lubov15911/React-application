@@ -1,8 +1,7 @@
 import React from 'react';
 
-import HeaderContainer from "../HeaderContainer/HeaderCondainer";
-import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import SearchPage from '../SearchPage/SearchPage';
+import MoviePage from '../MoviePage/MoviePage';
 import MovieContext from '../MovieContext';
 
 import './App.scss';
@@ -41,27 +40,29 @@ export default class App extends React.PureComponent {
     }
 
     render() {
-        const {
-            movieId,
-            error,
-        } = this.state;
+        const { movieId } = this.state;
+        let currentPage;
+
+        if (movieId) {
+            currentPage = <MovieContext.Provider value={this.getMoveData()}>
+                <MoviePage
+                    movieId={movieId}
+                    films={Films.data}
+                    routeToHomePage={this.goToSearchPage}
+                    goToMoviePage={this.goToMoviePage}
+                />
+            </MovieContext.Provider>
+        } else {
+            currentPage = <SearchPage
+                films={Films.data}
+                routeToHomePage={this.goToSearchPage}
+                goToMoviePage={this.goToMoviePage}
+            />;
+        }
 
         return (
             <div className="app">
-                <MovieContext.Provider value={this.getMoveData()}>
-                    <HeaderContainer
-                        movieId={movieId}
-                        routeToHomePage={this.goToSearchPage}
-                        error={error}
-                    />
-                </MovieContext.Provider>
-                <ErrorBoundary>
-                    <SearchResultsContainer
-                        total={Films.data.length}
-                        films={Films.data}
-                        raiseClickEvent={this.goToMoviePage}
-                    />
-                </ErrorBoundary>
+                {currentPage}
             </div>
         );
     }
