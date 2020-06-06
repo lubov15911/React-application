@@ -30,10 +30,10 @@ export default class SearchResultsContainer extends React.Component {
         } = this.props;
 
         return (
-            <div>
+            <>
                 <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
                 <SearchResults totalResults={total} films={films} raiseClickEvent={raiseClickEvent}/>
-            </div>
+            </>
         );
     }
 }

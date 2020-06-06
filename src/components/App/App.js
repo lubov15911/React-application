@@ -3,6 +3,7 @@ import React from 'react';
 import HeaderContainer from "../HeaderContainer/HeaderCondainer";
 import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import MovieContext from '../MovieContext';
 
 import './App.scss';
 
@@ -47,12 +48,13 @@ export default class App extends React.PureComponent {
 
         return (
             <div className="app">
-                <HeaderContainer
-                    movieId={movieId}
-                    movie={this.getMoveData()}
-                    routeToHomePage={this.goToSearchPage}
-                    error={error}
-                />
+                <MovieContext.Provider value={this.getMoveData()}>
+                    <HeaderContainer
+                        movieId={movieId}
+                        routeToHomePage={this.goToSearchPage}
+                        error={error}
+                    />
+                </MovieContext.Provider>
                 <ErrorBoundary>
                     <SearchResultsContainer
                         total={Films.data.length}

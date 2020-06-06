@@ -13,7 +13,6 @@ const HeaderContainer = (props) => {
         routeToHomePage,
         movieId,
         error,
-        movie,
     } = props;
     return (
         <div className="header-container">
@@ -21,7 +20,7 @@ const HeaderContainer = (props) => {
                 <HomePageLogoButton handleClick={routeToHomePage} />
                 {movieId && <HomePageSearchButton handleClick={routeToHomePage} />}
             </div>
-            {!movieId ? <ErrorBoundary><SearchHeader error={error}/></ErrorBoundary> : <MovieCard movie={movie}/>}
+            {!movieId ? <ErrorBoundary><SearchHeader error={error}/></ErrorBoundary> : <MovieCard />}
         </div>
     );
 };
@@ -29,16 +28,6 @@ HeaderContainer.propTypes = {
     movieId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     // eslint-disable-next-line react/require-default-props
     error: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    movie: PropTypes.oneOfType([null, PropTypes.shape({
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        vote_average: PropTypes.number.isRequired,
-        release_date: PropTypes.string.isRequired,
-        tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
-        overview: PropTypes.string.isRequired,
-    })]),
     routeToHomePage: PropTypes.func.isRequired,
 };
 

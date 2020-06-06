@@ -19,7 +19,7 @@ const ToggleComponent = (props) => {
         <div className="toggler">
             <p>
                 {toggleType}
-                y
+                By
             </p>
             <input
                 type="radio"
