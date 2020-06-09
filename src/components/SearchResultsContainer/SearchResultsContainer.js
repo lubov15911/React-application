@@ -32,7 +32,7 @@ export default class SearchResultsContainer extends React.Component {
         return (
             <>
                 <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
-                <SearchResults totalResults={total} films={films} raiseClickEvent={raiseClickEvent}/>
+                <SearchResults totalResults={total} films={films} raiseClickEvent={raiseClickEvent} />
             </>
         );
     }

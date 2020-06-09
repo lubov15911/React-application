@@ -35,7 +35,6 @@ export default class ResultsHeader extends React.Component {
             <div className="results-header">
                 {totalResults && <p><b>{totalResults} movie found</b></p>}
                 <ToggleComponent
-                    className="toggle1"
                     toggleType='Sort'
                     options={SortOptions}
                     selected={sortOption}

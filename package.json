@@ -6,14 +6,12 @@
     "build": "node_modules/.bin/webpack --mode development",
     "build:prod": "node_modules/.bin/webpack --config=webpack.prod.config.js --mode production",
     "start": "webpack-dev-server --open",
-    "test": "jest -u"
+    "test": "jest"
   },
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
+      "src/**/*.{js,jsx}"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
