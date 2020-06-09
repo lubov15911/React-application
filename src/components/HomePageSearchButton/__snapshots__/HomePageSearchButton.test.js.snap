@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePageSearchButton should render correctly with no props 1`] = `
+<button
+  className="home-page-btn"
+  onClick={[Function]}
+  type="button"
+>
+  Search icon
+</button>
+`;

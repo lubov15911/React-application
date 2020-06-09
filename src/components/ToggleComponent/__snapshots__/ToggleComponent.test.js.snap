@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchHeader should render correctly with no props 1`] = `
+<div
+  className="toggler"
+>
+  <p>
+    Sort
+    By
+  </p>
+  <input
+    checked={true}
+    id="first-option-Sort"
+    name="toggler-Sort"
+    onChange={[Function]}
+    type="radio"
+    value="Release date"
+  />
+  <label
+    htmlFor="first-option-Sort"
+  >
+    Release date
+  </label>
+  <input
+    checked={false}
+    id="second-option-Sort"
+    name="toggler-Sort"
+    onChange={[Function]}
+    type="radio"
+    value="Rating"
+  />
+  <label
+    htmlFor="second-option-Sort"
+  >
+    Rating
+  </label>
+</div>
+`;

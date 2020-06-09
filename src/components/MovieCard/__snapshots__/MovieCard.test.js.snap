@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard should render correctly with available context 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`MovieCard should render correctly with unavailable context 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchHeader should render correctly with no props 1`] = `
+<div
+  className="search-header"
+>
+  <h1
+    className="search-title"
+  >
+    Find your movie
+  </h1>
+  <SearchBar
+    handleSubmit={[Function]}
+  />
+  <ToggleComponent
+    handleToggle={[Function]}
+    options={
+      Object {
+        "first": "Title",
+        "second": "Genre",
+      }
+    }
+    selected="Title"
+    toggleType="Search"
+  />
+</div>
+`;

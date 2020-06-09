@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsHeader should render correctly 1`] = `
+<div
+  className="results-header"
+>
+  0
+  <ToggleComponent
+    handleToggle={[Function]}
+    options={
+      Object {
+        "first": "Release date",
+        "second": "Rating",
+      }
+    }
+    selected="Release date"
+    toggleType="Sort"
+  />
+</div>
+`;

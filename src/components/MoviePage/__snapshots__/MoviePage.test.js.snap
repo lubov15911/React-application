@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviePage should render correctly with props 1`] = `
+<Fragment>
+  <MoviePageHeader
+    movieId={354912}
+    routeToHomePage={[Function]}
+  />
+  <ErrorBoundary>
+    <SearchResultsContainer
+      films={Array []}
+      raiseClickEvent={[Function]}
+      total={0}
+    />
+  </ErrorBoundary>
+</Fragment>
+`;
