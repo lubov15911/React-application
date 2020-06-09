@@ -4,8 +4,9 @@ import { shallow } from 'enzyme';
 import SearchResults from './SearchResults';
 
 describe('SearchResults', () => {
+    const fakeFunction = () => {};
+
     it('should render correctly films array', () => {
-        const fakeFunction = () => {};
         const films = [{
             id: 354912,
             poster_path: 'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
@@ -30,7 +31,6 @@ describe('SearchResults', () => {
     });
 
     it('should render correctly empty films array', () => {
-        const fakeFunction = () => {};
         const films = [] ;
 
         const component = shallow(<SearchResults

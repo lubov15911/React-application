@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import MovieCard from './MovieCard';
 
-
-
 describe('MovieCard', () => {
     it('should render correctly with available context', () => {
         jest.mock('../MovieContext.js', () => ({

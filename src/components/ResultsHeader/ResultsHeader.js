@@ -22,6 +22,7 @@ export default class ResultsHeader extends React.Component {
     toggleSort() {
         const { sortOption } = this.state;
         const { handleSortOption } = this.props;
+
         const newValue = (sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
         this.setState({ sortOption: newValue });
         handleSortOption(newValue);

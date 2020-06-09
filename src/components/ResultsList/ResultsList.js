@@ -7,7 +7,7 @@ import './ResultsList.scss'
 const ResultsList = (props) => {
     const {
         films,
-        raiseClickEvent
+        raiseClickEvent,
     } = props;
 
     return (

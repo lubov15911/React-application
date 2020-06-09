@@ -12,6 +12,7 @@ export default class SearchPage extends React.PureComponent {
             routeToHomePage,
             goToMoviePage,
         } = this.props;
+
         return (
             <>
                 <SearchPageHeader

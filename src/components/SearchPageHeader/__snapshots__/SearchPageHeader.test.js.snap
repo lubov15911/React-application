@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchPageHeader should render correctly with props 1`] = `
+exports[`SearchPageHeader should render correctly 1`] = `
 <div
   className="header-container"
 >

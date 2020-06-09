@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviePageHeader should render correctly with props 1`] = `
+exports[`MoviePageHeader should render correctly 1`] = `
 <div
   className="movie-container "
 >
