@@ -1,31 +1,26 @@
 const path = require("path");
+const merge = require("webpack-merge");
 
-module.exports = {
-    entry: "./src/index.js",
-    mode: "development",
+const Config = require('./defaultWebpackConfig');
+
+module.exports = merge(Config, {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader",
-                options: { presets: ["@babel/env"] }
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
             }
         ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
-    output: {
-        path: path.resolve(__dirname, "dist/"),
-        publicPath: "/dist/",
-        filename: "bundle.js"
-    },
+    watch: true,
+    devtool: "source-map",
     devServer: {
         contentBase: path.join(__dirname, "public/"),
         port: 9000,
         publicPath: "http://localhost:9000/dist/"
     }
-};
+});
