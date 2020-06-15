@@ -2,6 +2,8 @@ import React from 'react';
 
 import SearchPage from '../SearchPage/SearchPage';
 import MoviePage from '../MoviePage/MoviePage';
+import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieContext from '../MovieContext';
 
 import './App.scss';
@@ -34,8 +36,6 @@ export default class App extends React.PureComponent {
     }
 
     goToMoviePage(movieId) {
-        // eslint-disable-next-line no-console
-        console.log('goToMoviePage', movieId);
         this.setState({ movieId });
     }
 
@@ -44,25 +44,27 @@ export default class App extends React.PureComponent {
         let currentPage;
 
         if (movieId) {
-            currentPage = <MovieContext.Provider value={this.getMoveData()}>
-                <MoviePage
-                    movieId={movieId}
-                    films={Films.data}
-                    routeToHomePage={this.goToSearchPage}
-                    goToMoviePage={this.goToMoviePage}
-                />
-            </MovieContext.Provider>
+            currentPage =
+                <MovieContext.Provider value={this.getMoveData()}>
+                    <MoviePage
+                        movieId={movieId}
+                        routeToHomePage={this.goToSearchPage}
+                    />
+                </MovieContext.Provider>
         } else {
-            currentPage = <SearchPage
-                films={Films.data}
-                routeToHomePage={this.goToSearchPage}
-                goToMoviePage={this.goToMoviePage}
-            />;
+            currentPage = <SearchPage routeToHomePage={this.goToSearchPage} />;
         }
 
         return (
             <div className="app">
                 {currentPage}
+                <ErrorBoundary>
+                    <SearchResultsContainer
+                        total={Films.data.length}
+                        films={Films.data}
+                        raiseClickEvent={this.goToMoviePage}
+                    />
+                </ErrorBoundary>
             </div>
         );
     }
