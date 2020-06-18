@@ -2,14 +2,14 @@ import React from 'react';
 
 import ToggleComponent from '../ToggleComponent/ToggleComponent';
 import SearchBar from '../SearchBar/SearchBar';
-import './SearchHeader.scss';
+import './SearchContainer.scss';
 
 const SearchOptions = {
     first: 'Title',
     second: 'Genre'
 };
 
-export default class SearchHeader extends React.Component {
+export default class SearchContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

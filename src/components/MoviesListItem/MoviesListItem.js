@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './MoviePreview.scss';
+import './MoviesListItem.scss';
 
-const MoviePreview = (props) => {
+const MoviesListItem = (props) => {
     const {
         movieData,
         raiseClickEvent,
@@ -25,7 +25,7 @@ const MoviePreview = (props) => {
         </li>
     );
 };
-MoviePreview.propTypes = {
+MoviesListItem.propTypes = {
     // eslint-disable-next-line react/require-default-props
     movieData: PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -37,4 +37,4 @@ MoviePreview.propTypes = {
     raiseClickEvent: PropTypes.func.isRequired,
 };
 
-export default MoviePreview;
+export default MoviesListItem;

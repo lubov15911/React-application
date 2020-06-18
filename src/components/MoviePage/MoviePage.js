@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MoviePageHeader from '../MoviePageHeader/MoviePageHeader';
+import HeaderContainer from '../HeaderContainer/HeaderContainer';
+import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
 
 export default class MoviePage extends React.PureComponent {
     render() {
         const {
-            movieId,
-            routeToHomePage,
+            films,
+            goToMoviePage,
         } = this.props;
 
         return (
-            <MoviePageHeader
-                movieId={movieId}
-                routeToHomePage={routeToHomePage}
-            />
+            <>
+                <HeaderContainer movieData={films[5]} />
+                <SearchResultsContainer
+                    total={films.length}
+                    films={films}
+                    raiseClickEvent={goToMoviePage} />
+            </>
         );
     }
 };
 MoviePage.propTypes = {
-    movieId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    routeToHomePage: PropTypes.func.isRequired,
+    films: PropTypes.arrayOf(PropTypes.object).isRequired,
+    goToMoviePage: PropTypes.func.isRequired,
 };
