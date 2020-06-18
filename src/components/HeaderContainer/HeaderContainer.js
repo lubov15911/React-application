@@ -7,7 +7,12 @@ import MovieCard from '../MovieCard/MovieCard';
 import './HeaderContainer.scss';
 
 const HeaderContainer = (props) => {
-    const { movieData, } = props;
+    const {
+        movieData,
+        handleSearchValue,
+        toggleSearch,
+        searchOption,
+    } = props;
 
     return (
         <div className="header-container">
@@ -15,12 +20,21 @@ const HeaderContainer = (props) => {
                 <a className="home-page-btn" href="."><b>netflix</b>roulette</a>
                 {movieData && <a className="home-page-btn" href=".">Search icon</a>}
             </div>
-            {movieData ? <MovieCard movieData={movieData} /> : <SearchContainer />}
+            {movieData ?
+                <MovieCard movieData={movieData} /> :
+                <SearchContainer
+                    handleSearchValue={handleSearchValue}
+                    toggleSearch={toggleSearch}
+                    searchOption={searchOption} />
+            }
         </div>
     );
 };
 HeaderContainer.defaultProps = {
     movieData: null,
+    handleSearchValue: null,
+    toggleSearch: null,
+    searchOption: null,
 };
 HeaderContainer.propTypes = {
     movieData: PropTypes.shape({
@@ -32,6 +46,9 @@ HeaderContainer.propTypes = {
         runtime: PropTypes.number.isRequired,
         overview: PropTypes.string.isRequired,
     }),
+    handleSearchValue: PropTypes.func,
+    toggleSearch: PropTypes.func,
+    searchOption: PropTypes.string,
 };
 
 export default HeaderContainer;

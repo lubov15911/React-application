@@ -15,8 +15,10 @@ const ResultsList = (props) => {
 
     return (
         <div className={`search-results ${!totalResults && 'no-items'}`}>
-            {totalResults && <MoviesList films={films} raiseClickEvent={raiseClickEvent} />}
-            {!totalResults && <EmptyList />}
+            {totalResults ?
+                <MoviesList films={films} raiseClickEvent={raiseClickEvent} /> :
+                <EmptyList />
+            }
         </div>
     );
 };
