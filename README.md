@@ -22,6 +22,7 @@
 2) Open `/coverage/Icov-report/index.html` to see coverage
 
 ### E2E Testing
-1) Run `npm e2e`
+0) Run app: `npm start`
+1) Run `npm run e2e`
 2) In the opened Cypress window click on `firstScenario.spec.js` file from `cypress/integration/` folder
 3) Observe test running
