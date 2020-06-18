@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ResultsHeader from '../ResultsHeader/ResultsHeader';
-import SearchResults from '../SearchResults/SearchResults';
+import ResultsList from '../ResultsList/ResultsList';
 
 export default class SearchResultsContainer extends React.Component {
     // TODO: is gonna be used
@@ -31,15 +31,8 @@ export default class SearchResultsContainer extends React.Component {
 
         return (
             <>
-                <ResultsHeader
-                    totalResults={total}
-                    handleSortOption={SearchResultsContainer.updateSortOption}
-                />
-                <SearchResults
-                    totalResults={total}
-                    films={films}
-                    raiseClickEvent={raiseClickEvent}
-                />
+                <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
+                <ResultsList totalResults={total} films={films} raiseClickEvent={raiseClickEvent} />
             </>
         );
     }

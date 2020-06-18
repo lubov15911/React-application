@@ -2,47 +2,38 @@ import React from 'react';
 
 import ToggleComponent from '../ToggleComponent/ToggleComponent';
 import SearchBar from '../SearchBar/SearchBar';
-import './SearchHeader.scss';
+import './SearchContainer.scss';
 
 const SearchOptions = {
     first: 'Title',
     second: 'Genre'
 };
 
-export default class SearchHeader extends React.Component {
+export default class SearchContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchOption: SearchOptions.first,
-            error: false
+            error: false,
         };
-        this.toggleSearch = this.toggleSearch.bind(this);
         this.sendSearchRequest = this.sendSearchRequest.bind(this);
     }
 
-    toggleSearch() {
-        const {
-            searchOption
-        } = this.state;
-        const newValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
-        this.setState({ searchOption: newValue });
-    }
-
     sendSearchRequest(value) {
-        // eslint-disable-next-line no-console
-        console.log('Send Search Request', value);
         if (value === 'error') {
             this.setState({ error: true });
         } else {
+            const { handleSearchValue, } = this.props;
             this.setState({ error: false });
+            handleSearchValue(value.toLowerCase());
         }
     }
 
     render() {
+        const { error, } = this.state;
         const {
+            toggleSearch,
             searchOption,
-            error,
-        } = this.state;
+        } = this.props;
 
         if (error) {
             throw new Error('I crashed!');
@@ -55,7 +46,7 @@ export default class SearchHeader extends React.Component {
                         toggleType='Search'
                         options={SearchOptions}
                         selected={searchOption}
-                        handleToggle={this.toggleSearch} />
+                        handleToggle={toggleSearch} />
                 </div>
             );
         }

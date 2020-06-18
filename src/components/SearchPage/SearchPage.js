@@ -1,35 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import HeaderContainer from "../HeaderContainer/HeaderContainer";
 import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import SearchPageHeader from "../SearchPageHeader/SearchPageHeader";
+
+const SearchOptions = {
+    first: 'Title',
+    second: 'Genre'
+};
 
 export default class SearchPage extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchOption: SearchOptions.first,
+            searchValue: '',
+            searchResults: this.props.films,
+        };
+        this.updateSearchOption = this.updateSearchOption.bind(this);
+        this.getMovies = this.getMovies.bind(this);
+    }
+
+    updateSearchOption() {
+        const { searchOption, } = this.state;
+        const newValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
+        this.setState({ searchOption: newValue });
+    }
+
+    getMovies(searchValue) {
+        const { films, } = this.props;
+
+        this.setState({ searchValue: searchValue });
+
+        if (!searchValue) {
+            this.setState({ searchResults: films });
+        } else {
+            let filteredFilms = films.filter((item) => item.title.toLowerCase().startsWith(searchValue));
+            this.setState({ searchResults: filteredFilms });
+        }
+    }
+
     render() {
+        const { goToMoviePage, } = this.props;
         const {
-            films,
-            routeToHomePage,
-            goToMoviePage,
-        } = this.props;
+            searchOption,
+            searchResults,
+        } = this.state;
 
         return (
             <>
-                <SearchPageHeader
-                    routeToHomePage={routeToHomePage} />
-                <ErrorBoundary>
-                    <SearchResultsContainer
-                        total={films.length}
-                        films={films}
-                        raiseClickEvent={goToMoviePage}
-                    />
-                </ErrorBoundary>
-            </>
-        );
+                <HeaderContainer
+                    handleSearchValue={this.getMovies}
+                    toggleSearch={this.updateSearchOption}
+                    searchOption={searchOption} />
+                <SearchResultsContainer
+                    total={searchResults.length}
+                    films={searchResults}
+                    raiseClickEvent={goToMoviePage} />
+            </>);
     }
 };
 SearchPage.propTypes = {
     films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    routeToHomePage: PropTypes.func.isRequired,
     goToMoviePage: PropTypes.func.isRequired,
 };

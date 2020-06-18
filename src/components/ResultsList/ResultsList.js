@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MoviePreview from '../MoviePreview/MoviePreview';
-import './ResultsList.scss'
+import EmptyList from '../EmptyList/EmptyList';
+import MoviesList from '../MoviesList/MoviesList';
+
+import './ResultsList.scss';
 
 const ResultsList = (props) => {
     const {
+        totalResults,
         films,
         raiseClickEvent,
     } = props;
 
     return (
-        <ul className="results-list">
-            {films.map(item => {
-                return <MoviePreview movieData={item} key={item.id} raiseClickEvent={raiseClickEvent} />;
-            })}
-        </ul>
+        <div className={`search-results ${!totalResults && 'no-items'}`}>
+            {totalResults ?
+                <MoviesList films={films} raiseClickEvent={raiseClickEvent} /> :
+                <EmptyList />
+            }
+        </div>
     );
 };
 ResultsList.propTypes = {
+    totalResults: PropTypes.number.isRequired,
     films: PropTypes.arrayOf(PropTypes.object).isRequired,
     raiseClickEvent: PropTypes.func.isRequired,
 };

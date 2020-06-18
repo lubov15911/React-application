@@ -2,7 +2,7 @@ import React from 'react';
 
 import SearchPage from '../SearchPage/SearchPage';
 import MoviePage from '../MoviePage/MoviePage';
-import MovieContext from '../MovieContext';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 import './App.scss';
 
@@ -15,55 +15,30 @@ export default class App extends React.PureComponent {
             movieId: ''
         };
         this.goToMoviePage = this.goToMoviePage.bind(this);
-        this.goToSearchPage = this.goToSearchPage.bind(this);
-        this.getMoveData = this.getMoveData.bind(this);
-    }
-
-    getMoveData() {
-        const { movieId } = this.state;
-        if (!movieId) {
-            return null;
-        }
-        return Films.data.find(item => {
-            return item.id === movieId;
-        });
-    }
-
-    goToSearchPage() {
-        this.setState({ movieId: '' });
     }
 
     goToMoviePage(movieId) {
-        // eslint-disable-next-line no-console
-        console.log('goToMoviePage', movieId);
         this.setState({ movieId });
     }
 
     render() {
-        const { movieId } = this.state;
-        let currentPage;
-
-        if (movieId) {
-            currentPage = <MovieContext.Provider value={this.getMoveData()}>
-                <MoviePage
-                    movieId={movieId}
-                    films={Films.data}
-                    routeToHomePage={this.goToSearchPage}
-                    goToMoviePage={this.goToMoviePage}
-                />
-            </MovieContext.Provider>
-        } else {
-            currentPage = <SearchPage
-                films={Films.data}
-                routeToHomePage={this.goToSearchPage}
-                goToMoviePage={this.goToMoviePage}
-            />;
-        }
+        const { movieId, } = this.state;
 
         return (
-            <div className="app">
-                {currentPage}
-            </div>
+            <ErrorBoundary>
+                <div className="app">
+                    {movieId &&
+                    <MoviePage
+                        films={Films.data}
+                        goToMoviePage={this.goToMoviePage} />
+                    }
+                    {!movieId &&
+                    <SearchPage
+                        films={Films.data}
+                        goToMoviePage={this.goToMoviePage} />
+                    }
+                </div>
+            </ErrorBoundary>
         );
     }
 };
