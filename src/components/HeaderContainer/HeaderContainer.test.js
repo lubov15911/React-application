@@ -1,13 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SearchPageHeader from './SearchPageHeader';
+import HeaderContainer from './HeaderContainer';
 
-describe('SearchPageHeader', () => {
+describe('HeaderContainer', () => {
     it('should render correctly', () => {
         const fakeFunction = () => {};
 
-        const component = shallow(<SearchPageHeader routeToHomePage={fakeFunction} />);
+        const component = shallow(<HeaderContainer />);
+
         expect(component).toMatchSnapshot();
     });
 });

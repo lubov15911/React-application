@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderContainer should render correctly 1`] = `
+<div
+  className="header-container"
+>
+  <div
+    className="buttons-container"
+  >
+    <a
+      className="home-page-btn"
+      href="."
+    >
+      <b>
+        netflix
+      </b>
+      roulette
+    </a>
+  </div>
+  <SearchContainer
+    handleSearchValue={null}
+    searchOption={null}
+    toggleSearch={null}
+  />
+</div>
+`;

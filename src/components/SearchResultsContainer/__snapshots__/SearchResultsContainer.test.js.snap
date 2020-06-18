@@ -6,7 +6,7 @@ exports[`SearchResultsContainer should render correctly films array 1`] = `
     handleSortOption={[Function]}
     totalResults={2}
   />
-  <SearchResults
+  <ResultsList
     films={
       Array [
         Object {

@@ -1,24 +1,23 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SearchHeader from './SearchHeader';
+import SearchContainer from './SearchContainer';
 
-describe('SearchHeader', () => {
+describe('SearchContainer', () => {
     let component;
+    const fakeFunction = () => {};
+    const fakeSearchOption = 'Title';
+    const fakeHandleSearchValue = jest.fn();
 
     beforeEach(() => {
-        component = shallow(<SearchHeader />);
+        component = shallow(<SearchContainer
+            handleSearchValue={fakeHandleSearchValue}
+            toggleSearch={fakeFunction}
+            searchOption={fakeSearchOption} />);
     });
 
-    it('should render correctly with no props', () => {
+    it('should render correctly with props', () => {
         expect(component).toMatchSnapshot();
-    });
-
-    it('should change searchOption state', () => {
-        component.find('ToggleComponent').props().handleToggle();
-        expect(component.state().searchOption).toBe('Genre');
-        component.find('ToggleComponent').props().handleToggle();
-        expect(component.state().searchOption).toBe('Title');
     });
 
     it('should change state of error - true', () => {
@@ -41,5 +40,11 @@ describe('SearchHeader', () => {
             error = e;
         }
         expect(error).not.toBeInstanceOf(Error);
+    });
+
+    it('should call search request', () => {
+        let searchValue = 'Lubov';
+        component.find('SearchBar').props().handleSubmit(searchValue);
+        expect(fakeHandleSearchValue).toHaveBeenCalledWith(searchValue.toLocaleLowerCase());
     });
 });

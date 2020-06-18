@@ -4,8 +4,10 @@ import { shallow } from 'enzyme';
 import ResultsList from './ResultsList';
 
 describe('ResultsList', () => {
-    it('should render correctly', () => {
-        const items = [{
+    const fakeFunction = () => {};
+
+    it('should render correctly films array', () => {
+        const films = [{
             id: 354912,
             poster_path: 'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
             title: 'Coco',
@@ -17,11 +19,23 @@ describe('ResultsList', () => {
             title: 'Ready Player One',
             release_date: '2018-03-28',
             genres: ["Adventure", "Science Fiction", "Action"],
-        }];
-        const fakeFunction = () => {};
+        }] ;
 
         const component = shallow(<ResultsList
-            films={items}
+            totalResults={films.length}
+            films={films}
+            raiseClickEvent={fakeFunction}
+        />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should render correctly empty films array', () => {
+        const films = [] ;
+
+        const component = shallow(<ResultsList
+            totalResults={films.length}
+            films={films}
             raiseClickEvent={fakeFunction}
         />);
 

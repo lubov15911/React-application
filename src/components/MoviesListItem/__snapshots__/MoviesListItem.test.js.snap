@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviePreview should render correctly 1`] = `
+exports[`MoviesListItem should render correctly 1`] = `
 <li
   className="movie-preview"
   onClick={[Function]}
