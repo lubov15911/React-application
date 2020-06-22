@@ -8,7 +8,7 @@ export default class SearchResultsContainer extends Component {
     static propTypes = {
         total: PropTypes.number.isRequired,
         films: PropTypes.arrayOf(PropTypes.object).isRequired,
-        raiseClickEvent: PropTypes.func.isRequired,
+        handleSelectMovie: PropTypes.func.isRequired,
     };
 
     // TODO: remove static when this is used
@@ -23,13 +23,13 @@ export default class SearchResultsContainer extends Component {
         const {
             total,
             films,
-            raiseClickEvent,
+            handleSelectMovie,
         } = this.props;
 
         return (
             <Fragment>
                 <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
-                <ResultsList totalResults={total} films={films} raiseClickEvent={raiseClickEvent} />
+                <ResultsList totalResults={total} films={films} raiseClickEvent={handleSelectMovie} />
             </Fragment>
         );
     }

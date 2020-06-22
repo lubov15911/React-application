@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ToggleComponent.scss';
 
-const ToggleComponent = (props) => {
-    const {
-        selected,
-        toggleType,
-        options,
-        handleToggle,
-    } = props;
-
+const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
     function isChecked(option) {
         return selected === option;
     }

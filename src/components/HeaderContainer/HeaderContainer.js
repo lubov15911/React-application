@@ -6,34 +6,25 @@ import MovieCard from '../MovieCard';
 
 import './HeaderContainer.scss';
 
-const HeaderContainer = (props) => {
-    const {
-        movieData,
-        handleSearchValue,
-        toggleSearch,
-        searchOption,
-    } = props;
-
+const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, }) => {
     return (
         <div className="header-container">
             <div className="buttons-container">
                 <a className="home-page-btn" href="."><b>netflix</b>roulette</a>
                 {movieData && <a className="home-page-btn" href=".">Search icon</a>}
             </div>
-            {movieData ?
-                <MovieCard movieData={movieData} /> :
+            {movieData ? <MovieCard movieData={movieData} /> :
                 <SearchContainer
                     handleSearchValue={handleSearchValue}
-                    toggleSearch={toggleSearch}
-                    searchOption={searchOption} />
-            }
+                    toggleSearch={handleToggleSearchCriteria}
+                    searchOption={searchOption} />}
         </div>
     );
 };
 HeaderContainer.defaultProps = {
     movieData: null,
     handleSearchValue: null,
-    toggleSearch: null,
+    handleToggleSearchCriteria: null,
     searchOption: null,
 };
 HeaderContainer.propTypes = {
@@ -47,7 +38,7 @@ HeaderContainer.propTypes = {
         overview: PropTypes.string.isRequired,
     }),
     handleSearchValue: PropTypes.func,
-    toggleSearch: PropTypes.func,
+    handleToggleSearchCriteria: PropTypes.func,
     searchOption: PropTypes.string,
 };
 

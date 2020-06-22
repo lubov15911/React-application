@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 import './MoviesListItem.scss';
 
-const MoviesListItem = (props) => {
-    const {
-        movieData,
-        raiseClickEvent,
-    } = props;
-
+const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
     function handleClick() {
         raiseClickEvent(movieData.id);
     }

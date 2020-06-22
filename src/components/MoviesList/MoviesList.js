@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 import MoviesListItem from '../MoviesListItem';
 import './MoviesList.scss'
 
-const MoviesList = (props) => {
-    const {
-        films,
-        raiseClickEvent
-    } = props;
-
+const MoviesList = ({ films, raiseClickEvent }) => {
     return (
         <ul className="movies-list">
             {films.map(item => {

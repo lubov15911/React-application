@@ -6,13 +6,7 @@ import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 
-const ResultsList = (props) => {
-    const {
-        totalResults,
-        films,
-        raiseClickEvent,
-    } = props;
-
+const ResultsList = ({ totalResults, films, raiseClickEvent, }) => {
     return (
         <div className={`search-results ${!totalResults && 'no-items'}`}>
             {totalResults ?

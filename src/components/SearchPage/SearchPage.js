@@ -17,11 +17,10 @@ export default class SearchPage extends PureComponent {
 
     constructor(props) {
         super(props);
-        const { films, } = this.props;
         this.state = {
             searchOption: SearchOptions.first,
             searchValue: '',
-            searchResults: films,
+            results: props.films,
         };
         this.updateSearchOption = this.updateSearchOption.bind(this);
         this.getMovies = this.getMovies.bind(this);
@@ -34,37 +33,37 @@ export default class SearchPage extends PureComponent {
         this.setState({ searchValue: value });
 
 
-        if (!searchValue) {
-            this.setState({ searchResults: films });
-        } else {
+        if (searchValue) {
             const filteredFilms = films.filter((item) => item.title.toLowerCase().startsWith(searchValue));
-            this.setState({ searchResults: filteredFilms });
+            this.setState({ results: filteredFilms });
+        } else {
+            this.setState({ results: films });
         }
     }
 
     updateSearchOption() {
         const { searchOption, } = this.state;
-        const newValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
-        this.setState({ searchOption: newValue });
+        const selectedValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
+        this.setState({ searchOption: selectedValue });
     }
 
     render() {
         const { goToMoviePage, } = this.props;
         const {
             searchOption,
-            searchResults,
+            results,
         } = this.state;
 
         return (
             <Fragment>
                 <HeaderContainer
                     handleSearchValue={this.getMovies}
-                    toggleSearch={this.updateSearchOption}
+                    handleToggleSearchCriteria={this.updateSearchOption}
                     searchOption={searchOption} />
                 <SearchResultsContainer
-                    total={searchResults.length}
-                    films={searchResults}
-                    raiseClickEvent={goToMoviePage} />
+                    total={results.length}
+                    films={results}
+                    handleSelectMovie={goToMoviePage} />
             </Fragment>);
     }
 };

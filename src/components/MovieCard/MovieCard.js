@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import './MovieCard.scss';
 
-const MovieCard = (props) => {
-    const { movieData, } = props;
-
+const MovieCard = ({ movieData, }) => {
     return (
         <div className="movie-card">
             <img src={movieData.poster_path} alt="" className="movie-card-poster"/>
