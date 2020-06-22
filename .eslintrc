@@ -7,6 +7,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "react/static-property-placement": ["warn", "static public field"],
-    "react/jsx-fragments" : ["error", "element"]
+    "react/jsx-fragments" : ["error", "element"],
+    "camelcase": ["off"]
   }
 }

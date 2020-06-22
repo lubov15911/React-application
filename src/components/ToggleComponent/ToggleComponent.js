@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 
 import './ToggleComponent.scss';
 
+const PROP_TYPES = {
+    selected: PropTypes.string.isRequired,
+    toggleType: PropTypes.string.isRequired,
+    options: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
+    handleToggle: PropTypes.func.isRequired,
+};
+
 const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
     function isChecked(option) {
         return selected === option;
@@ -35,11 +42,6 @@ const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
         </div>
     );
 };
-ToggleComponent.propTypes = {
-    selected: PropTypes.string.isRequired,
-    toggleType: PropTypes.string.isRequired,
-    options: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-    handleToggle: PropTypes.func.isRequired,
-};
+ToggleComponent.propTypes = PROP_TYPES;
 
 export default ToggleComponent;

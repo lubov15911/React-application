@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import MoviesListItem from '../MoviesListItem';
 import './MoviesList.scss'
 
+const PROP_TYPES = {
+    films: PropTypes.arrayOf(PropTypes.object).isRequired,
+    raiseClickEvent: PropTypes.func.isRequired,
+};
+
 const MoviesList = ({ films, raiseClickEvent }) => {
     return (
         <ul className="movies-list">
@@ -13,9 +18,6 @@ const MoviesList = ({ films, raiseClickEvent }) => {
         </ul>
     );
 };
-MoviesList.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
-};
+MoviesList.propTypes = PROP_TYPES;
 
 export default MoviesList;

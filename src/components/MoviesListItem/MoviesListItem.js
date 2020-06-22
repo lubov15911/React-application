@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 
 import './MoviesListItem.scss';
 
+const PROP_TYPES = {
+    movieData: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        poster_path: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        release_date: PropTypes.string.isRequired,
+        genres: PropTypes.array.isRequired,
+    }).isRequired,
+    raiseClickEvent: PropTypes.func.isRequired,
+};
+
 const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
     function handleClick() {
         raiseClickEvent(movieData.id);
@@ -20,16 +31,6 @@ const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
         </li>
     );
 };
-MoviesListItem.propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    movieData: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        release_date: PropTypes.string.isRequired,
-        genres: PropTypes.array.isRequired,
-    }),
-    raiseClickEvent: PropTypes.func.isRequired,
-};
+MoviesListItem.propTypes = PROP_TYPES;
 
 export default MoviesListItem;

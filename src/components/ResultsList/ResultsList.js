@@ -6,6 +6,12 @@ import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 
+const PROP_TYPES = {
+    totalResults: PropTypes.number.isRequired,
+    films: PropTypes.arrayOf(PropTypes.object).isRequired,
+    raiseClickEvent: PropTypes.func.isRequired,
+};
+
 const ResultsList = ({ totalResults, films, raiseClickEvent, }) => {
     return (
         <div className={`search-results ${!totalResults && 'no-items'}`}>
@@ -16,10 +22,6 @@ const ResultsList = ({ totalResults, films, raiseClickEvent, }) => {
         </div>
     );
 };
-ResultsList.propTypes = {
-    totalResults: PropTypes.number.isRequired,
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
-};
+ResultsList.propTypes = PROP_TYPES;
 
 export default ResultsList;

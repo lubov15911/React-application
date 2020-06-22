@@ -6,6 +6,27 @@ import MovieCard from '../MovieCard';
 
 import './HeaderContainer.scss';
 
+const DEFAULT_PROPS = {
+    movieData: null,
+    handleSearchValue: null,
+    handleToggleSearchCriteria: null,
+    searchOption: null,
+};
+const PROP_TYPES = {
+    movieData: PropTypes.shape({
+        poster_path: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        vote_average: PropTypes.number.isRequired,
+        release_date: PropTypes.string.isRequired,
+        tagline: PropTypes.string.isRequired,
+        runtime: PropTypes.number.isRequired,
+        overview: PropTypes.string.isRequired,
+    }),
+    handleSearchValue: PropTypes.func,
+    handleToggleSearchCriteria: PropTypes.func,
+    searchOption: PropTypes.string,
+};
+
 const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, }) => {
     return (
         <div className="header-container">
@@ -21,25 +42,7 @@ const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCrite
         </div>
     );
 };
-HeaderContainer.defaultProps = {
-    movieData: null,
-    handleSearchValue: null,
-    handleToggleSearchCriteria: null,
-    searchOption: null,
-};
-HeaderContainer.propTypes = {
-    movieData: PropTypes.shape({
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        vote_average: PropTypes.number.isRequired,
-        release_date: PropTypes.string.isRequired,
-        tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
-        overview: PropTypes.string.isRequired,
-    }),
-    handleSearchValue: PropTypes.func,
-    handleToggleSearchCriteria: PropTypes.func,
-    searchOption: PropTypes.string,
-};
+HeaderContainer.defaultProps = DEFAULT_PROPS;
+HeaderContainer.propTypes = PROP_TYPES;
 
 export default HeaderContainer;
