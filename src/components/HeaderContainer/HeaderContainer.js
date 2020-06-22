@@ -31,23 +31,21 @@ const PROP_TYPES = {
     searchValue: PropTypes.string,
 };
 
-const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, searchValue, handleSearchSubmit, }) => {
-    return (
-        <div className="header-container">
-            <div className="buttons-container">
-                <a className="home-page-btn" href="."><b>netflix</b>roulette</a>
-                {movieData && <a className="home-page-btn" href=".">Search icon</a>}
-            </div>
-            {movieData ? <MovieCard movieData={movieData} /> :
-                <SearchContainer
-                    handleSearchValue={handleSearchValue}
-                    handleSearchSubmit={handleSearchSubmit}
-                    toggleSearch={handleToggleSearchCriteria}
-                    searchOption={searchOption}
-                    searchValue={searchValue} />}
+const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, searchValue, handleSearchSubmit, }) => (
+    <div className="header-container">
+        <div className="buttons-container">
+            <a className="home-page-btn" href="."><b>netflix</b>roulette</a>
+            {movieData && <a className="home-page-btn" href=".">Search icon</a>}
         </div>
-    );
-};
+        {movieData ? <MovieCard movieData={movieData} /> :
+            <SearchContainer
+                handleSearchValue={handleSearchValue}
+                handleSearchSubmit={handleSearchSubmit}
+                toggleSearch={handleToggleSearchCriteria}
+                searchOption={searchOption}
+                searchValue={searchValue} />}
+    </div>
+);
 HeaderContainer.defaultProps = DEFAULT_PROPS;
 HeaderContainer.propTypes = PROP_TYPES;
 

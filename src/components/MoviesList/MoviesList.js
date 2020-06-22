@@ -9,15 +9,13 @@ const PROP_TYPES = {
     raiseClickEvent: PropTypes.func.isRequired,
 };
 
-const MoviesList = ({ films, raiseClickEvent }) => {
-    return (
-        <ul className="movies-list">
-            {films.map(item => {
-                return <MoviesListItem movieData={item} key={item.id} raiseClickEvent={raiseClickEvent} />;
-            })}
-        </ul>
-    );
-};
+const MoviesList = ({ films, raiseClickEvent }) => (
+    <ul className="movies-list">
+        {films.map(item => {
+            return <MoviesListItem movieData={item} key={item.id} raiseClickEvent={raiseClickEvent} />;
+        })}
+    </ul>
+);
 MoviesList.propTypes = PROP_TYPES;
 
 export default MoviesList;

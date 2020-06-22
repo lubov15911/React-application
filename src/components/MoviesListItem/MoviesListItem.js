@@ -15,9 +15,7 @@ const PROP_TYPES = {
 };
 
 const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
-    function handleClick() {
-        raiseClickEvent(movieData.id);
-    }
+    const handleClick = () => raiseClickEvent(movieData.id);
 
     return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions

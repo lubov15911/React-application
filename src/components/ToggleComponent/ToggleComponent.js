@@ -11,9 +11,7 @@ const PROP_TYPES = {
 };
 
 const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
-    function isChecked(option) {
-        return selected === option;
-    }
+    const isChecked = option => selected === option;
 
     return (
         <div className="toggler">
