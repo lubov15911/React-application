@@ -1,7 +1,8 @@
 import React from 'react';
 
-import ToggleComponent from '../ToggleComponent/ToggleComponent';
-import SearchBar from '../SearchBar/SearchBar';
+import ToggleComponent from '../ToggleComponent';
+import SearchBar from '../SearchBar';
+
 import './SearchContainer.scss';
 
 const SearchOptions = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleComponent from '../ToggleComponent/ToggleComponent';
+import ToggleComponent from '../ToggleComponent';
 
 import './ResultsHeader.scss';
 

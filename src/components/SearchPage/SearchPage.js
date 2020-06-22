@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import HeaderContainer from "../HeaderContainer/HeaderContainer";
-import SearchResultsContainer from '../SearchResultsContainer/SearchResultsContainer';
+import HeaderContainer from "../HeaderContainer";
+import SearchResultsContainer from '../SearchResultsContainer';
 
 const SearchOptions = {
     first: 'Title',

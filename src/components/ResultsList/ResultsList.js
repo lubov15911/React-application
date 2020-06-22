@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import EmptyList from '../EmptyList/EmptyList';
-import MoviesList from '../MoviesList/MoviesList';
+import EmptyList from '../EmptyList';
+import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 

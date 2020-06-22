@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SearchContainer from '../SearchContainer/SearchContainer';
-import MovieCard from '../MovieCard/MovieCard';
+import SearchContainer from '../SearchContainer';
+import MovieCard from '../MovieCard';
 
 import './HeaderContainer.scss';
 

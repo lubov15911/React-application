@@ -1,8 +1,8 @@
 import React from 'react';
 
-import SearchPage from '../SearchPage/SearchPage';
-import MoviePage from '../MoviePage/MoviePage';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import SearchPage from '../SearchPage';
+import MoviePage from '../MoviePage';
+import ErrorBoundary from '../ErrorBoundary';
 
 import './App.scss';
 

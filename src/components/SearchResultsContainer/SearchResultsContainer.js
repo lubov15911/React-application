@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ResultsHeader from '../ResultsHeader/ResultsHeader';
-import ResultsList from '../ResultsList/ResultsList';
+import ResultsHeader from '../ResultsHeader';
+import ResultsList from '../ResultsList';
 
 export default class SearchResultsContainer extends React.Component {
     // TODO: is gonna be used

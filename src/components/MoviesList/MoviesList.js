@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MoviesListItem from '../MoviesListItem/MoviesListItem';
+import MoviesListItem from '../MoviesListItem';
 import './MoviesList.scss'
 
 const MoviesList = (props) => {
