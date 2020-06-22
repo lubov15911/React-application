@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ToggleComponent from '../ToggleComponent';
 import SearchBar from '../SearchBar';
@@ -11,6 +12,12 @@ const SearchOptions = {
 };
 
 export default class SearchContainer extends Component {
+    static propTypes = {
+        toggleSearch: PropTypes.func.isRequired,
+        searchOption: PropTypes.func.isRequired,
+        handleSearchValue: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {

@@ -5,6 +5,11 @@ import HeaderContainer from '../HeaderContainer';
 import SearchResultsContainer from '../SearchResultsContainer';
 
 export default class MoviePage extends PureComponent {
+    static propTypes = {
+        films: PropTypes.arrayOf(PropTypes.object).isRequired,
+        goToMoviePage: PropTypes.func.isRequired,
+    };
+
     render() {
         const {
             films,
@@ -21,8 +26,4 @@ export default class MoviePage extends PureComponent {
             </>
         );
     }
-};
-MoviePage.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    goToMoviePage: PropTypes.func.isRequired,
 };

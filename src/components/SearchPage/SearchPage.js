@@ -10,34 +10,42 @@ const SearchOptions = {
 };
 
 export default class SearchPage extends PureComponent {
+    static propTypes = {
+        films: PropTypes.arrayOf(PropTypes.object).isRequired,
+        goToMoviePage: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
+        const { films, } = this.props;
         this.state = {
             searchOption: SearchOptions.first,
             searchValue: '',
-            searchResults: this.props.films,
+            searchResults: films,
         };
         this.updateSearchOption = this.updateSearchOption.bind(this);
         this.getMovies = this.getMovies.bind(this);
+    }
+
+    getMovies(value) {
+        const { films, } = this.props;
+        const { searchValue, } = this.state;
+
+        this.setState({ searchValue: value });
+
+
+        if (!searchValue) {
+            this.setState({ searchResults: films });
+        } else {
+            const filteredFilms = films.filter((item) => item.title.toLowerCase().startsWith(searchValue));
+            this.setState({ searchResults: filteredFilms });
+        }
     }
 
     updateSearchOption() {
         const { searchOption, } = this.state;
         const newValue = (searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first;
         this.setState({ searchOption: newValue });
-    }
-
-    getMovies(searchValue) {
-        const { films, } = this.props;
-
-        this.setState({ searchValue: searchValue });
-
-        if (!searchValue) {
-            this.setState({ searchResults: films });
-        } else {
-            let filteredFilms = films.filter((item) => item.title.toLowerCase().startsWith(searchValue));
-            this.setState({ searchResults: filteredFilms });
-        }
     }
 
     render() {
@@ -59,8 +67,4 @@ export default class SearchPage extends PureComponent {
                     raiseClickEvent={goToMoviePage} />
             </>);
     }
-};
-SearchPage.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    goToMoviePage: PropTypes.func.isRequired,
 };

@@ -5,14 +5,11 @@ import ResultsHeader from '../ResultsHeader';
 import ResultsList from '../ResultsList';
 
 export default class SearchResultsContainer extends Component {
-    // TODO: is gonna be used
-    /* constructor(props) {
-        super(props);
-        this.state = {
-            sortBy: ''
-        };
-        this.updateSortOption = this.updateSortOption.bind(this);
-    } */
+    static propTypes = {
+        total: PropTypes.number.isRequired,
+        films: PropTypes.arrayOf(PropTypes.object).isRequired,
+        raiseClickEvent: PropTypes.func.isRequired,
+    };
 
     // TODO: remove static when this is used
     static updateSortOption(newValue) {
@@ -37,8 +34,3 @@ export default class SearchResultsContainer extends Component {
         );
     }
 }
-SearchResultsContainer.propTypes = {
-    total: PropTypes.number.isRequired,
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
-};

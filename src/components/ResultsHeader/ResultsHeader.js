@@ -11,6 +11,11 @@ const SortOptions = {
 };
 
 export default class ResultsHeader extends Component {
+    static propTypes = {
+        totalResults: PropTypes.number.isRequired,
+        handleSortOption: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +49,3 @@ export default class ResultsHeader extends Component {
         );
     }
 }
-ResultsHeader.propTypes = {
-    totalResults: PropTypes.number.isRequired,
-    handleSortOption: PropTypes.func.isRequired,
-};

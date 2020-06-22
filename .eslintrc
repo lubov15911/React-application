@@ -5,6 +5,7 @@
     "linebreak-style": ["error", "windows"],
     "indent": [2, 4, {"SwitchCase": 1}],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "react/static-property-placement": ["warn", "static public field"]
   }
 }

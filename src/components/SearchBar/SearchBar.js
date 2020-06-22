@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import './SearchBar.scss';
 
 export default class SearchBar extends Component {
+    static propTypes = {
+        handleSubmit: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = { value: '' };
@@ -33,7 +37,4 @@ export default class SearchBar extends Component {
             </form>
         );
     }
-};
-SearchBar.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
 };
