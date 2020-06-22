@@ -1,3 +1,5 @@
+@import "../../_colors";
+
 .movie-card {
   display: flex;
   padding: 4em 4em 0 0;
@@ -24,7 +26,7 @@
       .movie-card-info-rating {
         border: 0.1em white solid;
         border-radius: 50%;
-        color: #a1e66f;
+        color: $green;
         font-size: 3em;
         opacity: 0.8;
         font-weight: normal;
@@ -44,7 +46,7 @@
     }
 
     .movie-card-highlight {
-      color: #f65261;
+      color: $pink;
       font-size: 2.4em;
     }
 

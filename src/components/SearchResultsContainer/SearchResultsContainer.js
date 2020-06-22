@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ResultsHeader from '../ResultsHeader';
 import ResultsList from '../ResultsList';
 
-export default class SearchResultsContainer extends React.Component {
+export default class SearchResultsContainer extends Component {
     // TODO: is gonna be used
     /* constructor(props) {
         super(props);

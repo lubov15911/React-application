@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderContainer from '../HeaderContainer';
 import SearchResultsContainer from '../SearchResultsContainer';
 
-export default class MoviePage extends React.PureComponent {
+export default class MoviePage extends PureComponent {
     render() {
         const {
             films,

@@ -1,5 +1,7 @@
+@import "../../_colors";
+
 .header-container {
-  background: #232323;
+  background: $darkGray;
   display: flex;
   flex-direction: column;
   padding: 3em 2em 4em 6em;
@@ -9,7 +11,7 @@
     justify-content: space-between;
 
     .home-page-btn {
-      color: #f65261;
+      color: $pink;
       font-size: 14px;
     }
   }

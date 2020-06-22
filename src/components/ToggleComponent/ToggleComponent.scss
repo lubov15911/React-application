@@ -1,3 +1,5 @@
+@import "../../_colors";
+
 .toggler {
   display: flex;
   font-size: 1.5em;
@@ -26,6 +28,6 @@
   }
 
   input:checked + label {
-    background-color: #f65261;
+    background-color: $pink;
   }
 }

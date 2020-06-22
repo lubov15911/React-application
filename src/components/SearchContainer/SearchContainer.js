@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ToggleComponent from '../ToggleComponent';
 import SearchBar from '../SearchBar';
@@ -10,7 +10,7 @@ const SearchOptions = {
     second: 'Genre'
 };
 
-export default class SearchContainer extends React.Component {
+export default class SearchContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {

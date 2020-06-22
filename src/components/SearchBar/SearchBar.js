@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './SearchBar.scss';
 
-export default class SearchBar extends React.Component {
+export default class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };

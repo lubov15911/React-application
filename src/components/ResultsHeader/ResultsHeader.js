@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleComponent from '../ToggleComponent';
@@ -10,7 +10,7 @@ const SortOptions = {
     second: 'Rating'
 };
 
-export default class ResultsHeader extends React.Component {
+export default class ResultsHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {

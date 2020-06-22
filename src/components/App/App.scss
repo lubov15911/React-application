@@ -1,5 +1,7 @@
+@import "../../_colors";
+
 body {
-  background: #555;
+  background: $gray;
   font-size: 10px;
   font-family: Arial, Helvetica, sans-serif;
   margin: 5.5em;
@@ -10,9 +12,9 @@ p {
 }
 
 .app {
-  background: #232323;
+  background: $darkGray;
   box-shadow: 0 0.2rem 3.4rem 0 rgba(0, 0, 0, 0.27);
-  color: white;
+  color: $white;
   width: 120em;
   margin: 0 auto;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderContainer from "../HeaderContainer";
@@ -9,7 +9,7 @@ const SearchOptions = {
     second: 'Genre'
 };
 
-export default class SearchPage extends React.PureComponent {
+export default class SearchPage extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {

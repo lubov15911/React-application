@@ -1,5 +1,7 @@
+@import "../../_colors";
+
 .results-header {
-  background: #555;
+  background: $gray;
   padding: 0 12em;
   height: 7em;
   display: flex;
