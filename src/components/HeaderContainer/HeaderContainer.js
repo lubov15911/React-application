@@ -10,7 +10,9 @@ const DEFAULT_PROPS = {
     movieData: null,
     handleSearchValue: null,
     handleToggleSearchCriteria: null,
+    handleSearchSubmit: null,
     searchOption: null,
+    searchValue: null,
 };
 const PROP_TYPES = {
     movieData: PropTypes.shape({
@@ -24,10 +26,12 @@ const PROP_TYPES = {
     }),
     handleSearchValue: PropTypes.func,
     handleToggleSearchCriteria: PropTypes.func,
+    handleSearchSubmit: PropTypes.func,
     searchOption: PropTypes.string,
+    searchValue: PropTypes.string,
 };
 
-const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, }) => {
+const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCriteria, searchOption, searchValue, handleSearchSubmit, }) => {
     return (
         <div className="header-container">
             <div className="buttons-container">
@@ -37,8 +41,10 @@ const HeaderContainer = ({ movieData, handleSearchValue, handleToggleSearchCrite
             {movieData ? <MovieCard movieData={movieData} /> :
                 <SearchContainer
                     handleSearchValue={handleSearchValue}
+                    handleSearchSubmit={handleSearchSubmit}
                     toggleSearch={handleToggleSearchCriteria}
-                    searchOption={searchOption} />}
+                    searchOption={searchOption}
+                    searchValue={searchValue} />}
         </div>
     );
 };

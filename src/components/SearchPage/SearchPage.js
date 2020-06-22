@@ -22,6 +22,7 @@ export default class SearchPage extends PureComponent {
         };
         this.updateSearchOption = this.updateSearchOption.bind(this);
         this.updateSortOption = this.updateSortOption.bind(this);
+        this.updateSearchValue = this.updateSearchValue.bind(this);
         this.getMovies = this.getMovies.bind(this);
     }
 
@@ -29,8 +30,7 @@ export default class SearchPage extends PureComponent {
         const { films, } = this.props;
         const { searchValue, } = this.state;
 
-        this.setState({ searchValue: value });
-
+        this.updateSearchValue(value);
 
         if (searchValue) {
             const filteredFilms = films.filter((item) => item.title.toLowerCase().startsWith(searchValue));
@@ -38,6 +38,10 @@ export default class SearchPage extends PureComponent {
         } else {
             this.setState({ results: films });
         }
+    }
+
+    updateSearchValue(value) {
+        this.setState({ searchValue: value });
     }
 
     updateSearchOption() {
@@ -56,6 +60,7 @@ export default class SearchPage extends PureComponent {
         const { goToMoviePage, } = this.props;
         const {
             searchOption,
+            searchValue,
             sortOption,
             results,
         } = this.state;
@@ -63,8 +68,10 @@ export default class SearchPage extends PureComponent {
         return (
             <Fragment>
                 <HeaderContainer
-                    handleSearchValue={this.getMovies}
+                    handleSearchValue={this.updateSearchValue}
+                    handleSearchSubmit={this.getMovies}
                     handleToggleSearchCriteria={this.updateSearchOption}
+                    searchValue={searchValue}
                     searchOption={searchOption} />
                 <SearchResultsContainer
                     total={results.length}

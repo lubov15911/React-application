@@ -6,33 +6,35 @@ import './SearchBar.scss';
 export default class SearchBar extends Component {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired,
+        handleSearchValue: PropTypes.func.isRequired,
+        searchValue: PropTypes.string.isRequired,
     };
 
     constructor(props) {
         super(props);
-        this.state = { value: '' };
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(event) {
-        const { handleSubmit } = this.props;
-        const {
-            value,
-        } = this.state;
-        handleSubmit(value);
+        const { handleSubmit, searchValue } = this.props;
+
+        handleSubmit(searchValue);
         event.preventDefault();
     }
 
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+
+    handleChange({ target: { value } }) {
+        const { handleSearchValue, } = this.props;
+
+        handleSearchValue(value);
     }
 
     render() {
-        const { value } = this.state;
+        const { searchValue, } = this.props;
         return (
             <form className="search-form" onSubmit={this.onSubmit}>
-                <input type="text" placeholder="Search" value={value} onChange={this.handleChange} />
+                <input type="text" placeholder="Search" value={searchValue} onChange={this.handleChange} />
                 <button type="submit"><p>Search</p></button>
             </form>
         );
