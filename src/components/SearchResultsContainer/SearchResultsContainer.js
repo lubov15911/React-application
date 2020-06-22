@@ -1,44 +1,24 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import ResultsHeader from '../ResultsHeader/ResultsHeader';
-import ResultsList from '../ResultsList/ResultsList';
+import ResultsHeader from '../ResultsHeader';
+import ResultsList from '../ResultsList';
 
-export default class SearchResultsContainer extends React.Component {
-    // TODO: is gonna be used
-    /* constructor(props) {
-        super(props);
-        this.state = {
-            sortBy: ''
-        };
-        this.updateSortOption = this.updateSortOption.bind(this);
-    } */
-
-    // TODO: remove static when this is used
-    static updateSortOption(newValue) {
-        // eslint-disable-next-line no-console
-        console.log('New sort option:', newValue);
-        // TODO: is gonna be used
-        // this.setState({ sortBy: newValue });
-    }
-
-    render() {
-        const {
-            total,
-            films,
-            raiseClickEvent,
-        } = this.props;
-
-        return (
-            <>
-                <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
-                <ResultsList totalResults={total} films={films} raiseClickEvent={raiseClickEvent} />
-            </>
-        );
-    }
-}
-SearchResultsContainer.propTypes = {
+const PROP_TYPES = {
     total: PropTypes.number.isRequired,
     films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
+    sortOption: PropTypes.string.isRequired,
+    handleSelectMovie: PropTypes.func.isRequired,
+    handleSortOption: PropTypes.func.isRequired,
 };
+
+const SearchResultsContainer = ({ total, films, handleSelectMovie, handleSortOption, sortOption, }) => (
+    <Fragment>
+        <ResultsHeader resultsAmount={total} sortOption={sortOption} handleSortOption={handleSortOption} />
+        <ResultsList resultsAmount={total} films={films} raiseClickEvent={handleSelectMovie} />
+    </Fragment>
+);
+SearchResultsContainer.propTypes = PROP_TYPES;
+
+export default SearchResultsContainer;
+

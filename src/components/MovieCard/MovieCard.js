@@ -3,28 +3,7 @@ import PropTypes from 'prop-types';
 
 import './MovieCard.scss';
 
-const MovieCard = (props) => {
-    const { movieData, } = props;
-
-    return (
-        <div className="movie-card">
-            <img src={movieData.poster_path} alt="" className="movie-card-poster"/>
-            <div className="movie-card-info">
-                <div className="movie-card-info-header">
-                    <h1 className="movie-card-info-title">{movieData.title}</h1>
-                    <div className="movie-card-info-rating"><span>{movieData.vote_average}</span></div>
-                </div>
-                <p className="movie-card-info-tagline">{movieData.tagline}</p>
-                <div>
-                    <span className="movie-card-highlight">{movieData.release_date.slice(0, 4)}</span> year
-                    <span className="movie-card-highlight">{movieData.runtime}</span> min
-                </div>
-                <p className="movie-card-description">{movieData.overview}</p>
-            </div>
-        </div>
-    );
-};
-MovieCard.propTypes = {
+const PROP_TYPES = {
     movieData: PropTypes.shape({
         poster_path: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
@@ -35,5 +14,24 @@ MovieCard.propTypes = {
         overview: PropTypes.string.isRequired,
     }).isRequired,
 };
+
+const MovieCard = ({ movieData: { poster_path, title, vote_average, tagline, release_date, runtime, overview, } }) => (
+    <div className="movie-card">
+        <img src={poster_path} alt="" className="movie-card-poster"/>
+        <div className="movie-card-info">
+            <div className="movie-card-info-header">
+                <h1 className="movie-card-info-title">{title}</h1>
+                <div className="movie-card-info-rating"><span>{vote_average}</span></div>
+            </div>
+            <p className="movie-card-info-tagline">{tagline}</p>
+            <div>
+                <span className="movie-card-highlight">{release_date.slice(0, 4)}</span> year
+                <span className="movie-card-highlight">{runtime}</span> min
+            </div>
+            <p className="movie-card-description">{overview}</p>
+        </div>
+    </div>
+);
+MovieCard.propTypes = PROP_TYPES;
 
 export default MovieCard;

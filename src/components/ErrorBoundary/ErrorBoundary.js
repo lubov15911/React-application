@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ErrorBoundary extends React.Component {
+export default class ErrorBoundary extends Component {
+    static propTypes = {
+        children:  PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.node),
+            PropTypes.node
+        ]).isRequired,
+    };
+
     constructor(props) {
         super(props);
-        this.state = { error: null, errorInfo: null };
+        this.state = {
+            error: null,
+            errorInfo: null
+        };
     }
 
     componentDidCatch(error, errorInfo) {
@@ -38,9 +48,3 @@ export default class ErrorBoundary extends React.Component {
         return children;
     }
 }
-ErrorBoundary.propTypes = {
-    children:  PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]).isRequired,
-};

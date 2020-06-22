@@ -1,31 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import EmptyList from '../EmptyList/EmptyList';
-import MoviesList from '../MoviesList/MoviesList';
+import EmptyList from '../EmptyList';
+import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 
-const ResultsList = (props) => {
-    const {
-        totalResults,
-        films,
-        raiseClickEvent,
-    } = props;
+const PROP_TYPES = {
+    resultsAmount: PropTypes.number.isRequired,
+    films: PropTypes.arrayOf(PropTypes.object).isRequired,
+    raiseClickEvent: PropTypes.func.isRequired,
+};
 
+const ResultsList = ({ resultsAmount, films, raiseClickEvent, }) => {
     return (
-        <div className={`search-results ${!totalResults && 'no-items'}`}>
-            {totalResults ?
+        <div className={`search-results ${!resultsAmount && 'no-items'}`}>
+            {resultsAmount ?
                 <MoviesList films={films} raiseClickEvent={raiseClickEvent} /> :
                 <EmptyList />
             }
         </div>
     );
 };
-ResultsList.propTypes = {
-    totalResults: PropTypes.number.isRequired,
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
-};
+ResultsList.propTypes = PROP_TYPES;
 
 export default ResultsList;

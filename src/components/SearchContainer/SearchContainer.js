@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import ToggleComponent from '../ToggleComponent/ToggleComponent';
-import SearchBar from '../SearchBar/SearchBar';
+import ToggleComponent from '../ToggleComponent';
+import SearchBar from '../SearchBar';
+
 import './SearchContainer.scss';
 
-const SearchOptions = {
-    first: 'Title',
-    second: 'Genre'
-};
+import { SearchOptions } from '../../constants';
 
-export default class SearchContainer extends React.Component {
+export default class SearchContainer extends Component {
+    static propTypes = {
+        toggleSearch: PropTypes.func.isRequired,
+        searchOption: PropTypes.string.isRequired,
+        searchValue: PropTypes.string.isRequired,
+        handleSearchValue: PropTypes.func.isRequired,
+        handleSearchSubmit: PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,9 +29,9 @@ export default class SearchContainer extends React.Component {
         if (value === 'error') {
             this.setState({ error: true });
         } else {
-            const { handleSearchValue, } = this.props;
+            const { handleSearchSubmit, } = this.props;
             this.setState({ error: false });
-            handleSearchValue(value.toLowerCase());
+            handleSearchSubmit(value.toLowerCase());
         }
     }
 
@@ -33,6 +40,8 @@ export default class SearchContainer extends React.Component {
         const {
             toggleSearch,
             searchOption,
+            searchValue,
+            handleSearchValue,
         } = this.props;
 
         if (error) {
@@ -41,7 +50,10 @@ export default class SearchContainer extends React.Component {
             return (
                 <div className="search-header">
                     <h1 className="search-title">Find your movie</h1>
-                    <SearchBar handleSubmit={this.sendSearchRequest} />
+                    <SearchBar
+                        handleSearchValue={handleSearchValue}
+                        handleSubmit={this.sendSearchRequest}
+                        searchValue={searchValue} />
                     <ToggleComponent
                         toggleType='Search'
                         options={SearchOptions}

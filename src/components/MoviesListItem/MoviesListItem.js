@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 
 import './MoviesListItem.scss';
 
-const MoviesListItem = (props) => {
-    const {
-        movieData,
-        raiseClickEvent,
-    } = props;
+const PROP_TYPES = {
+    movieData: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        poster_path: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        release_date: PropTypes.string.isRequired,
+        genres: PropTypes.array.isRequired,
+    }).isRequired,
+    raiseClickEvent: PropTypes.func.isRequired,
+};
 
-    function handleClick() {
-        raiseClickEvent(movieData.id);
-    }
+const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
+    const handleClick = () => raiseClickEvent(movieData.id);
 
     return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -25,16 +29,6 @@ const MoviesListItem = (props) => {
         </li>
     );
 };
-MoviesListItem.propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    movieData: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        release_date: PropTypes.string.isRequired,
-        genres: PropTypes.array.isRequired,
-    }),
-    raiseClickEvent: PropTypes.func.isRequired,
-};
+MoviesListItem.propTypes = PROP_TYPES;
 
 export default MoviesListItem;

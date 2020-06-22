@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-import SearchPage from '../SearchPage/SearchPage';
-import MoviePage from '../MoviePage/MoviePage';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import SearchPage from '../SearchPage';
+import MoviePage from '../MoviePage';
+import ErrorBoundary from '../ErrorBoundary';
 
 import './App.scss';
 
-import Films from '../../data/films.json';
+import FILMS from '../../data/films.json';
 
-export default class App extends React.PureComponent {
+export default class App extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            movieId: ''
+            movieId: null
         };
         this.goToMoviePage = this.goToMoviePage.bind(this);
     }
@@ -27,16 +27,8 @@ export default class App extends React.PureComponent {
         return (
             <ErrorBoundary>
                 <div className="app">
-                    {movieId &&
-                    <MoviePage
-                        films={Films.data}
-                        goToMoviePage={this.goToMoviePage} />
-                    }
-                    {!movieId &&
-                    <SearchPage
-                        films={Films.data}
-                        goToMoviePage={this.goToMoviePage} />
-                    }
+                    {movieId ? <MoviePage films={FILMS.data} goToMoviePage={this.goToMoviePage} /> :
+                        <SearchPage films={FILMS.data} goToMoviePage={this.goToMoviePage} />}
                 </div>
             </ErrorBoundary>
         );
