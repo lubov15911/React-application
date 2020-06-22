@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderContainer from "../HeaderContainer";
@@ -56,7 +56,7 @@ export default class SearchPage extends PureComponent {
         } = this.state;
 
         return (
-            <>
+            <Fragment>
                 <HeaderContainer
                     handleSearchValue={this.getMovies}
                     toggleSearch={this.updateSearchOption}
@@ -65,6 +65,6 @@ export default class SearchPage extends PureComponent {
                     total={searchResults.length}
                     films={searchResults}
                     raiseClickEvent={goToMoviePage} />
-            </>);
+            </Fragment>);
     }
 };

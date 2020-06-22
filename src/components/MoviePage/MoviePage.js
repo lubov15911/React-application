@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderContainer from '../HeaderContainer';
@@ -17,13 +17,13 @@ export default class MoviePage extends PureComponent {
         } = this.props;
 
         return (
-            <>
+            <Fragment>
                 <HeaderContainer movieData={films[5]} />
                 <SearchResultsContainer
                     total={films.length}
                     films={films}
                     raiseClickEvent={goToMoviePage} />
-            </>
+            </Fragment>
         );
     }
 };

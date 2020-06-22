@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ResultsHeader from '../ResultsHeader';
@@ -27,10 +27,10 @@ export default class SearchResultsContainer extends Component {
         } = this.props;
 
         return (
-            <>
+            <Fragment>
                 <ResultsHeader totalResults={total} handleSortOption={SearchResultsContainer.updateSortOption} />
                 <ResultsList totalResults={total} films={films} raiseClickEvent={raiseClickEvent} />
-            </>
+            </Fragment>
         );
     }
 }
