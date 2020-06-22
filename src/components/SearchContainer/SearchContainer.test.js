@@ -7,13 +7,17 @@ describe('SearchContainer', () => {
     let component;
     const fakeFunction = () => {};
     const fakeSearchOption = 'Title';
-    const fakeHandleSearchValue = jest.fn();
+    const fakeSearchValue = '';
+    const fakeHandleSearchSubmit = jest.fn();
 
     beforeEach(() => {
         component = shallow(<SearchContainer
-            handleSearchValue={fakeHandleSearchValue}
+            handleSearchValue={fakeFunction}
+            handleSearchSubmit={fakeHandleSearchSubmit}
             toggleSearch={fakeFunction}
-            searchOption={fakeSearchOption} />);
+            searchOption={fakeSearchOption}
+            searchValue={fakeSearchValue}
+        />);
     });
 
     it('should render correctly with props', () => {
@@ -45,6 +49,6 @@ describe('SearchContainer', () => {
     it('should call search request', () => {
         let searchValue = 'Lubov';
         component.find('SearchBar').props().handleSubmit(searchValue);
-        expect(fakeHandleSearchValue).toHaveBeenCalledWith(searchValue.toLocaleLowerCase());
+        expect(fakeHandleSearchSubmit).toHaveBeenCalledWith(searchValue.toLocaleLowerCase());
     });
 });

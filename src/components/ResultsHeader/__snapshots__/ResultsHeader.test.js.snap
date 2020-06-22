@@ -6,14 +6,15 @@ exports[`ResultsHeader should render correctly 1`] = `
 >
   0
   <ToggleComponent
-    handleToggle={[Function]}
+    className="toggle1"
+    handleToggle={[MockFunction]}
     options={
       Object {
         "first": "Release date",
         "second": "Rating",
       }
     }
-    selected="Release date"
+    selected="Title"
     toggleType="Sort"
   />
 </div>

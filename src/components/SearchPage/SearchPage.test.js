@@ -34,21 +34,28 @@ describe('SearchPage', () => {
     });
 
     it('should change searchOption state', () => {
-        component.find('HeaderContainer').props().toggleSearch();
+        component.find('HeaderContainer').props().handleToggleSearchCriteria();
         expect(component.state().searchOption).toBe('Genre');
-        component.find('HeaderContainer').props().toggleSearch();
+        component.find('HeaderContainer').props().handleToggleSearchCriteria();
         expect(component.state().searchOption).toBe('Title');
+    });
+
+    it('should change sortOption state', () => {
+        component.find('SearchResultsContainer').props().handleSortOption();
+        expect(component.state().sortOption).toBe('Rating');
+        component.find('SearchResultsContainer').props().handleSortOption();
+        expect(component.state().sortOption).toBe('Release date');
     });
 
     describe('should change searchResults to', () => {
         it('default array', () => {
-            component.find('HeaderContainer').props().handleSearchValue('');
-            expect(component.state().searchResults).toEqual(expect.arrayContaining(items));
+            component.find('HeaderContainer').props().handleSearchSubmit('');
+            expect(component.state().results).toEqual(expect.arrayContaining(items));
         });
 
         it('search array', () => {
-            component.find('HeaderContainer').props().handleSearchValue('ready');
-            expect(component.state().searchResults).toEqual(expect.arrayContaining([items[1]]));
+            component.find('HeaderContainer').props().handleSearchSubmit('ready');
+            expect(component.state().results).toEqual(expect.arrayContaining([items[1]]));
         });
     });
 });

@@ -4,7 +4,8 @@ exports[`SearchResultsContainer should render correctly films array 1`] = `
 <Fragment>
   <ResultsHeader
     handleSortOption={[Function]}
-    totalResults={2}
+    resultsAmount={2}
+    sortOption="Title"
   />
   <ResultsList
     films={
@@ -35,7 +36,7 @@ exports[`SearchResultsContainer should render correctly films array 1`] = `
       ]
     }
     raiseClickEvent={[Function]}
-    totalResults={2}
+    resultsAmount={2}
   />
 </Fragment>
 `;

@@ -10,7 +10,9 @@ exports[`SearchContainer should render correctly with props 1`] = `
     Find your movie
   </h1>
   <SearchBar
+    handleSearchValue={[Function]}
     handleSubmit={[Function]}
+    searchValue=""
   />
   <ToggleComponent
     handleToggle={[Function]}

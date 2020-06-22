@@ -9,7 +9,7 @@ exports[`SearchBar should render correctly 1`] = `
     onChange={[Function]}
     placeholder="Search"
     type="text"
-    value=""
+    value="Tarantino"
   />
   <button
     type="submit"

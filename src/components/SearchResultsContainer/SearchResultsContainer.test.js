@@ -18,28 +18,16 @@ describe('SearchResultsContainer', () => {
         release_date: '2018-03-28',
         genres: ["Adventure", "Science Fiction", "Action"],
     }] ;
+    const sortOption = 'Title';
 
     it('should render correctly films array', () => {
         const component = shallow(<SearchResultsContainer
             total={films.length}
             films={films}
-            raiseClickEvent={fakeFunction}
-        />);
+            sortOption={sortOption}
+            handleSelectMovie={fakeFunction}
+            handleSortOption={fakeFunction} />);
 
         expect(component).toMatchSnapshot();
-    });
-
-    // TODO: Update test when state change is implemented
-    it('should update sort options', () => {
-        const spy = jest.spyOn(SearchResultsContainer, 'updateSortOption');
-
-        const component = shallow(<SearchResultsContainer
-            total={films.length}
-            films={films}
-            raiseClickEvent={fakeFunction}
-        />);
-
-        component.find('ResultsHeader').props().handleSortOption('Title');
-        expect(spy).toHaveBeenCalled();
     });
 });

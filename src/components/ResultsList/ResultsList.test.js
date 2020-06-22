@@ -22,7 +22,7 @@ describe('ResultsList', () => {
         }] ;
 
         const component = shallow(<ResultsList
-            totalResults={films.length}
+            resultsAmount={films.length}
             films={films}
             raiseClickEvent={fakeFunction}
         />);
@@ -34,7 +34,7 @@ describe('ResultsList', () => {
         const films = [] ;
 
         const component = shallow(<ResultsList
-            totalResults={films.length}
+            resultsAmount={films.length}
             films={films}
             raiseClickEvent={fakeFunction}
         />);

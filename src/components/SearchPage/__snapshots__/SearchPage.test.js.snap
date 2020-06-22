@@ -3,10 +3,12 @@
 exports[`SearchPage should render correctly 1`] = `
 <Fragment>
   <HeaderContainer
+    handleSearchSubmit={[Function]}
     handleSearchValue={[Function]}
+    handleToggleSearchCriteria={[Function]}
     movieData={null}
     searchOption="Title"
-    toggleSearch={[Function]}
+    searchValue=""
   />
   <SearchResultsContainer
     films={
@@ -36,7 +38,9 @@ exports[`SearchPage should render correctly 1`] = `
         },
       ]
     }
-    raiseClickEvent={[Function]}
+    handleSelectMovie={[Function]}
+    handleSortOption={[Function]}
+    sortOption="Release date"
     total={2}
   />
 </Fragment>

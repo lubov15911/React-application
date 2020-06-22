@@ -4,13 +4,18 @@ import { shallow } from 'enzyme';
 import SearchBar from './SearchBar';
 
 describe('SearchBar', () => {
-    const fakeFunction = jest.fn();
+    const fakeFunctionSubmit = jest.fn();
+    const fakeFunctionSearchValue= jest.fn();
     const searchValue = 'Tarantino';
-    const changeEvent = { target: { value: searchValue } };
+    let changeEvent;
     let component;
 
     beforeEach(() => {
-        component = shallow(<SearchBar handleSubmit={fakeFunction} />);
+        changeEvent = { target: { value: searchValue } };
+        component = shallow(<SearchBar
+            searchValue={searchValue}
+            handleSubmit={fakeFunctionSubmit}
+            handleSearchValue={fakeFunctionSearchValue} />);
     });
 
     it('should render correctly', () => {
@@ -18,15 +23,14 @@ describe('SearchBar', () => {
     });
 
     it('should change value state', () => {
-        const searchValue = 'Tarantino';
         component.find('input').simulate('change', changeEvent);
-        expect(component.state().value).toBe(searchValue);
+        expect(fakeFunctionSearchValue).toHaveBeenCalledWith(searchValue);
     });
 
     it('should submit current search value', () => {
         const submitEvent = { preventDefault: () => {} };
         component.find('input').simulate('change', changeEvent);
         component.find('form').simulate('submit', submitEvent);
-        expect(fakeFunction).toHaveBeenCalledWith(searchValue);
+        expect(fakeFunctionSubmit).toHaveBeenCalledWith(searchValue);
     });
 });
