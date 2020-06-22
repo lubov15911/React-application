@@ -6,15 +6,12 @@ import SearchBar from '../SearchBar';
 
 import './SearchContainer.scss';
 
-const SearchOptions = {
-    first: 'Title',
-    second: 'Genre'
-};
+import { SearchOptions } from '../../constants';
 
 export default class SearchContainer extends Component {
     static propTypes = {
         toggleSearch: PropTypes.func.isRequired,
-        searchOption: PropTypes.func.isRequired,
+        searchOption: PropTypes.string.isRequired,
         handleSearchValue: PropTypes.func.isRequired,
     };
 

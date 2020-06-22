@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import HeaderContainer from "../HeaderContainer";
 import SearchResultsContainer from '../SearchResultsContainer';
 
-const SearchOptions = {
-    first: 'Title',
-    second: 'Genre'
-};
+import { SearchOptions, SortOptions } from '../../constants';
 
 export default class SearchPage extends PureComponent {
     static propTypes = {
@@ -21,8 +18,10 @@ export default class SearchPage extends PureComponent {
             searchOption: SearchOptions.first,
             searchValue: '',
             results: props.films,
+            sortOption: SortOptions.first,
         };
         this.updateSearchOption = this.updateSearchOption.bind(this);
+        this.updateSortOption = this.updateSortOption.bind(this);
         this.getMovies = this.getMovies.bind(this);
     }
 
@@ -47,10 +46,17 @@ export default class SearchPage extends PureComponent {
         this.setState({ searchOption: selectedValue });
     }
 
+    updateSortOption() {
+        const { sortOption, } = this.state;
+        const selectedValue = (sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
+        this.setState({ sortOption: selectedValue });
+    }
+
     render() {
         const { goToMoviePage, } = this.props;
         const {
             searchOption,
+            sortOption,
             results,
         } = this.state;
 
@@ -63,7 +69,9 @@ export default class SearchPage extends PureComponent {
                 <SearchResultsContainer
                     total={results.length}
                     films={results}
-                    handleSelectMovie={goToMoviePage} />
+                    handleSelectMovie={goToMoviePage}
+                    sortOption={sortOption}
+                    handleSortOption={this.updateSortOption} />
             </Fragment>);
     }
 };

@@ -1,51 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleComponent from '../ToggleComponent';
 
 import './ResultsHeader.scss';
 
-const SortOptions = {
-    first: 'Release date',
-    second: 'Rating'
+import { SortOptions } from '../../constants';
+
+const PROP_TYPES = {
+    resultsAmount: PropTypes.number.isRequired,
+    handleSortOption: PropTypes.func.isRequired,
+    sortOption: PropTypes.string.isRequired,
 };
 
-export default class ResultsHeader extends Component {
-    static propTypes = {
-        totalResults: PropTypes.number.isRequired,
-        handleSortOption: PropTypes.func.isRequired,
-    };
+const ResultsHeader = ({ resultsAmount, sortOption, handleSortOption, }) => (
+    <div className="results-header">
+        {resultsAmount && <p><b>{resultsAmount} movie found</b></p>}
+        <ToggleComponent
+            className="toggle1"
+            toggleType='Sort'
+            options={SortOptions}
+            selected={sortOption}
+            handleToggle={handleSortOption} />
+    </div>
+);
+ResultsHeader.propTypes = PROP_TYPES;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            sortOption: SortOptions.first
-        };
-        this.toggleSort = this.toggleSort.bind(this);
-    }
-
-    toggleSort() {
-        const { sortOption } = this.state;
-        const { handleSortOption } = this.props;
-        const newValue = (sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
-        this.setState({ sortOption: newValue });
-        handleSortOption(newValue);
-    }
-
-    render() {
-        const { totalResults } = this.props;
-        const { sortOption } = this.state;
-
-        return (
-            <div className="results-header">
-                {totalResults && <p><b>{totalResults} movie found</b></p>}
-                <ToggleComponent
-                    className="toggle1"
-                    toggleType='Sort'
-                    options={SortOptions}
-                    selected={sortOption}
-                    handleToggle={this.toggleSort} />
-            </div>
-        );
-    }
-}
+export default ResultsHeader;

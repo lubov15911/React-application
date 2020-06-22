@@ -7,15 +7,15 @@ import MoviesList from '../MoviesList';
 import './ResultsList.scss';
 
 const PROP_TYPES = {
-    totalResults: PropTypes.number.isRequired,
+    resultsAmount: PropTypes.number.isRequired,
     films: PropTypes.arrayOf(PropTypes.object).isRequired,
     raiseClickEvent: PropTypes.func.isRequired,
 };
 
-const ResultsList = ({ totalResults, films, raiseClickEvent, }) => {
+const ResultsList = ({ resultsAmount, films, raiseClickEvent, }) => {
     return (
-        <div className={`search-results ${!totalResults && 'no-items'}`}>
-            {totalResults ?
+        <div className={`search-results ${!resultsAmount && 'no-items'}`}>
+            {resultsAmount ?
                 <MoviesList films={films} raiseClickEvent={raiseClickEvent} /> :
                 <EmptyList />
             }
