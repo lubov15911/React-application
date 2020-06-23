@@ -1,0 +1,18 @@
+@import "../../_colors";
+
+.header-container {
+  background: $darkGray;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 2em 4em 6em;
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+
+    .home-page-btn {
+      color: $pink;
+      font-size: 14px;
+    }
+  }
+}

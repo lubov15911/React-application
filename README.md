@@ -9,3 +9,7 @@
 4) Open [`localhost:9000`][1] if dev server is run
 
 [1]:http://localhost:9000
+
+#### Error handling
+1) insert 'error' into search input
+2) to return to home page refresh the page
