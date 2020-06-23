@@ -1,13 +1,46 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import HeaderContainer from '../HeaderContainer';
-import SearchResultsContainer from '../SearchResultsContainer';
+import ResultsHeader from '../ResultsHeader';
+import ResultsList from '../ResultsList';
 
-const MoviePage = () => (
-    <Fragment>
-        <HeaderContainer />
-        <SearchResultsContainer />
-    </Fragment>
-);
+import { asyncGetMovies } from '../../actions';
+import { SearchOptions } from '../../constants';
 
-export default MoviePage;
+class MoviePage extends PureComponent {
+    static propTypes = {
+        requestData: PropTypes.func.isRequired,
+        movieData: PropTypes.shape({
+            genres: PropTypes.array.isRequired,
+        }).isRequired,
+    };
+
+    componentDidMount() {
+        const {
+            requestData,
+            movieData,
+        } = this.props;
+
+        requestData(movieData.genres[0], SearchOptions.second);
+    }
+
+    render() {
+        return (
+            <Fragment>
+                <HeaderContainer />
+                <ResultsHeader />
+                <ResultsList />
+            </Fragment>
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        movieData: state.movieData,
+    }
+};
+
+export default connect(mapStateToProps, { requestData: asyncGetMovies })(MoviePage);

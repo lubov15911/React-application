@@ -1,35 +1,40 @@
 import initialState from '../store/initialState';
 
-import FILMS from '../data/films.json';
-import {SearchOptions, SortOptions} from '../constants';
+import { SearchOptions, SortOptions } from '../constants';
+import {
+    OPEN_MOVIE_PAGE,
+    UPDATE_SORT_OPTION,
+    UPDATE_SEARCH_OPTION,
+    UPDATE_SEARCH_VALUE,
+    SAVE_FILM_LIST,
+} from '../constants/actions';
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'OPEN_MOVIE_PAGE':
+        case OPEN_MOVIE_PAGE:
             return {
                 ...state,
-                movieData: state.films[5],
+                movieData: action.payload,
             };
-        case 'UPDATE_SORT_OPTION':
+        case UPDATE_SORT_OPTION:
             return {
                 ...state,
                 sortOption: (state.sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first,
             };
-        case 'UPDATE_SEARCH_OPTION':
+        case UPDATE_SEARCH_OPTION:
             return {
                 ...state,
                 searchOption: (state.searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first,
             };
-        case 'UPDATE_SEARCH_VALUE':
+        case UPDATE_SEARCH_VALUE:
             return {
                 ...state,
                 searchValue: action.payload,
             };
-        case 'SUBMIT_SEARCH_REQUEST':
+        case SAVE_FILM_LIST:
             return {
                 ...state,
-                searchValue: action.payload,
-                films: action.payload ? state.films.filter((item) => item.title.toLowerCase().startsWith(action.payload.toLowerCase())) : FILMS.data,
+                films: action.payload,
             };
         default:
             return state;

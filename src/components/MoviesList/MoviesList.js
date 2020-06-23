@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 
 import MoviesListItem from '../MoviesListItem';
-import './MoviesList.scss'
-import {openMoviePage,} from "../../actions";
 
-const PROP_TYPES = {
+import './MoviesList.scss'
+
+const propTypes = {
     films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    goToMoviePage: PropTypes.func.isRequired,
 };
 
-const MoviesList = ({ films, goToMoviePage }) => (
+const MoviesList = ({ films }) => (
     <ul className="movies-list">
         {films.map(item => {
-            return <MoviesListItem movieData={item} key={item.id} raiseClickEvent={goToMoviePage} />;
+            return <MoviesListItem movieData={item} key={item.id} />;
         })}
     </ul>
 );
-MoviesList.propTypes = PROP_TYPES;
+MoviesList.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {
         films: state.films,
     }
 };
-export default connect(mapStateToProps, { goToMoviePage: openMoviePage })(MoviesList);
+export default connect(mapStateToProps)(MoviesList);

@@ -9,5 +9,6 @@
     "react/static-property-placement": ["warn", "static public field"],
     "react/jsx-fragments" : ["error", "element"],
     "camelcase": ["off"]
+//    "no-console": ["off"]
   }
 }

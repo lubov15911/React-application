@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './MoviesListItem.scss';
 
-const PROP_TYPES = {
+import { asyncGetMovieData } from '../../actions';
+
+const propTypes = {
     movieData: PropTypes.shape({
         id: PropTypes.number.isRequired,
         poster_path: PropTypes.string.isRequired,
@@ -11,11 +14,11 @@ const PROP_TYPES = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.array.isRequired,
     }).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
+    goToMoviePage: PropTypes.func.isRequired,
 };
 
-const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
-    const handleClick = () => raiseClickEvent(movieData.id);
+const MoviesListItem = ({ movieData, goToMoviePage, }) => {
+    const handleClick = () => goToMoviePage(movieData.id);
 
     return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -29,6 +32,6 @@ const MoviesListItem = ({ movieData, raiseClickEvent, }) => {
         </li>
     );
 };
-MoviesListItem.propTypes = PROP_TYPES;
+MoviesListItem.propTypes = propTypes;
 
-export default MoviesListItem;
+export default connect(null, { goToMoviePage: asyncGetMovieData })(MoviesListItem);

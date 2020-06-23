@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 import './MovieCard.scss';
 
@@ -11,7 +11,7 @@ const propTypes = {
         vote_average: PropTypes.number.isRequired,
         release_date: PropTypes.string.isRequired,
         tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
+        runtime: PropTypes.number,
         overview: PropTypes.string.isRequired,
     }).isRequired,
 };
@@ -27,7 +27,8 @@ const MovieCard = ({ movieData: { poster_path, title, vote_average, tagline, rel
             <p className="movie-card-info-tagline">{tagline}</p>
             <div>
                 <span className="movie-card-highlight">{release_date.slice(0, 4)}</span> year
-                <span className="movie-card-highlight">{runtime}</span> min
+                {runtime &&(<span className="movie-card-highlight">{runtime}</span>)}
+                {runtime && 'min'}
             </div>
             <p className="movie-card-description">{overview}</p>
         </div>

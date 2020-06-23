@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 
 import EmptyList from '../EmptyList';
 import MoviesList from '../MoviesList';
@@ -20,7 +20,7 @@ const ResultsList = ({ resultsAmount, }) => {
 };
 ResultsList.propTypes = propTypes;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         resultsAmount: state.films.length,
     }
