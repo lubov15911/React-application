@@ -1,0 +1,10 @@
+.search-header {
+  display: flex;
+  flex-direction: column;
+  margin: 0 6em;
+
+  .search-title {
+    font-size: 4em;
+    font-weight: normal;
+  }
+}

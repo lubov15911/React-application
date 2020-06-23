@@ -1,0 +1,18 @@
+@import "../../_colors";
+
+.results-header {
+  background: $gray;
+  padding: 0 12em;
+  height: 7em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > p {
+    font-size: 1.5em;
+  }
+
+  .toggler {
+    margin-left: auto;
+  }
+}
