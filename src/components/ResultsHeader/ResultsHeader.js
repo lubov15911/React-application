@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
 import ToggleComponent from '../ToggleComponent';
@@ -6,14 +7,15 @@ import ToggleComponent from '../ToggleComponent';
 import './ResultsHeader.scss';
 
 import { SortOptions } from '../../constants';
+import { updateSortOption } from '../../actions';
 
-const PROP_TYPES = {
+const propTypes = {
     resultsAmount: PropTypes.number.isRequired,
-    handleSortOption: PropTypes.func.isRequired,
     sortOption: PropTypes.string.isRequired,
+    toggleSortOption: PropTypes.func.isRequired,
 };
 
-const ResultsHeader = ({ resultsAmount, sortOption, handleSortOption, }) => (
+const ResultsHeader = ({ resultsAmount, sortOption, toggleSortOption, }) => (
     <div className="results-header">
         {resultsAmount && <p><b>{resultsAmount} movie found</b></p>}
         <ToggleComponent
@@ -21,9 +23,16 @@ const ResultsHeader = ({ resultsAmount, sortOption, handleSortOption, }) => (
             toggleType='Sort'
             options={SortOptions}
             selected={sortOption}
-            handleToggle={handleSortOption} />
+            handleToggle={toggleSortOption} />
     </div>
 );
-ResultsHeader.propTypes = PROP_TYPES;
+ResultsHeader.propTypes = propTypes;
 
-export default ResultsHeader;
+const mapStateToProps = (state) => {
+    return {
+        resultsAmount: state.films.length,
+        sortOption: state.sortOption,
+    }
+};
+export default connect(mapStateToProps, { toggleSortOption: updateSortOption })(ResultsHeader);
+
