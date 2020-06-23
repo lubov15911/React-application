@@ -1,6 +1,6 @@
 import initialState from '../store/initialState';
 
-import { SearchOptions, SortOptions } from '../constants';
+import { SortOptions } from '../constants';
 import {
     OPEN_MOVIE_PAGE,
     UPDATE_SORT_OPTION,
@@ -17,14 +17,22 @@ const rootReducer = (state = initialState, action) => {
                 movieData: action.payload,
             };
         case UPDATE_SORT_OPTION:
+            // eslint-disable-next-line no-case-declarations
+            const sortingField = action.payload === SortOptions.first ? 'release_date' : 'vote_average';
             return {
                 ...state,
-                sortOption: (state.sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first,
+                sortOption: action.payload,
+                films: [...state.films].sort((filmA, filmB) => {
+                    if (filmA[sortingField] > filmB[sortingField]) return -1;
+                    if (filmA[sortingField] < filmB[sortingField]) return 1;
+                    return 0;
+                }),
+
             };
         case UPDATE_SEARCH_OPTION:
             return {
                 ...state,
-                searchOption: (state.searchOption === SearchOptions.first) ? SearchOptions.second : SearchOptions.first,
+                searchOption: action.payload,
             };
         case UPDATE_SEARCH_VALUE:
             return {

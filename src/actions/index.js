@@ -59,10 +59,12 @@ export const updateSearchValue = (value) => ({
 });
 
 // searchOption/sortOption actions
-export const updateSortOption = () => ({
-    type: UPDATE_SORT_OPTION
+export const updateSortOption = (value) => ({
+    type: UPDATE_SORT_OPTION,
+    payload: value,
 });
 
-export const updateSearchOption = () => ({
-    type: UPDATE_SEARCH_OPTION
+export const updateSearchOption = (value) => ({
+    type: UPDATE_SEARCH_OPTION,
+    payload: value,
 });

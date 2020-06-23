@@ -21,18 +21,22 @@ const propTypes = {
     }),
 };
 
-const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption, }) => (
-    <div className="results-header">
-        {movieData ? <p>Films by {movieData.genres[0]} genre</p> :
-            resultsAmount && <p><b>{resultsAmount} movie found</b></p>}
-        <ToggleComponent
-            className="toggle1"
-            toggleType="Sort"
-            options={SortOptions}
-            selected={sortOption}
-            handleToggle={toggleSortOption} />
-    </div>
-);
+const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption }) => {
+    const handleToggle = ({ currentTarget: { value } }) => toggleSortOption(value);
+
+    return (
+        <div className="results-header">
+            {movieData ? <p>Films by {movieData.genres[0]} genre</p> :
+                resultsAmount && <p><b>{resultsAmount} movie found</b></p>}
+            <ToggleComponent
+                className="toggle1"
+                toggleType="Sort "
+                options={SortOptions}
+                selected={sortOption}
+                handleToggle={handleToggle} />
+        </div>
+    )
+};
 ResultsHeader.defaultProps = defaultProps;
 ResultsHeader.propTypes = propTypes;
 
