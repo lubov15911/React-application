@@ -1,54 +1,39 @@
 import React from 'react';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import SearchContainer from './SearchContainer';
 
+import { updateSearchOption } from '../../actions';
 import { searchValueData, searchOptionsData } from '../../../__mocks__/constantsMock';
 
 describe('SearchContainer', () => {
-    const simpleFakeFunction = () => {};
-    const spyFakeFunctionSearchSubmit = jest.fn();
+    const mockStore = configureStore()({
+        searchOption: searchOptionsData.title,
+        searchValue: searchValueData,
+    });
+    const changeEvent = { currentTarget: { value: searchOptionsData.genre } };
 
     let component;
 
     beforeEach(() => {
-        component = shallow(<SearchContainer
-            handleSearchValue={simpleFakeFunction}
-            handleSearchSubmit={spyFakeFunctionSearchSubmit}
-            toggleSearch={simpleFakeFunction}
-            searchOption={searchOptionsData.title}
-            searchValue={searchValueData}
-        />);
+        mockStore.dispatch = jest.fn();
+        component = shallow(<SearchContainer store={mockStore} />).dive();
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it('should render correctly with props', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should change state of error - true', () => {
-        let error;
-        try {
-            component.find('SearchBar').props().handleSubmit('error');
-            expect(component.state().error).toBeTruthy();
-        } catch (e) {
-            error = e;
-        }
-        expect(error).toBeInstanceOf(Error);
-    });
-
-    it('should change state of error - false', () => {
-        let error;
-        try {
-            component.find('SearchBar').props().handleSubmit(searchValueData);
-            expect(component.state().error).toBeFalsy();
-        } catch (e) {
-            error = e;
-        }
-        expect(error).not.toBeInstanceOf(Error);
-    });
-
-    it('should call search request', () => {
-        component.find('SearchBar').props().handleSubmit(searchValueData);
-        expect(spyFakeFunctionSearchSubmit).toHaveBeenCalledWith(searchValueData.toLocaleLowerCase());
+    it('should dispatch search request', () => {
+        component.find('ToggleComponent').props().handleToggle(changeEvent);
+        expect(mockStore.dispatch).toHaveBeenCalledTimes(2);
+        expect(mockStore.dispatch).toHaveBeenNthCalledWith(1, updateSearchOption(searchOptionsData.genre));
+        // TODO: There is async action should be called here. Check it properly later
+        expect(mockStore.dispatch).toHaveBeenNthCalledWith(2, expect.any(Function));
     });
 });

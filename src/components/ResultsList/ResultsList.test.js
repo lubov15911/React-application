@@ -1,31 +1,28 @@
 import React from 'react';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import ResultsList from './ResultsList';
 
-import { filmsData } from '../../../__mocks__/constantsMock';
+import { filmsData } from "../../../__mocks__/constantsMock";
 
 describe('ResultsList', () => {
-    const simpleFakeFunction = () => {};
-
     it('should render correctly films array', () => {
-        const component = shallow(<ResultsList
-            resultsAmount={filmsData.length}
-            films={filmsData}
-            raiseClickEvent={simpleFakeFunction}
-        />);
+        const mockStore = configureStore()({
+            films: filmsData,
+        });
+
+        const component = shallow(<ResultsList store={mockStore} />).dive();
 
         expect(component).toMatchSnapshot();
     });
 
     it('should render correctly empty films array', () => {
-        const films = [] ;
+        const mockStore = configureStore()({
+            films: [],
+        });
 
-        const component = shallow(<ResultsList
-            resultsAmount={films.length}
-            films={films}
-            raiseClickEvent={simpleFakeFunction}
-        />);
+        const component = shallow(<ResultsList store={mockStore} />).dive();
 
         expect(component).toMatchSnapshot();
     });

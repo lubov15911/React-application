@@ -1,55 +1,30 @@
 import React from 'react';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import SearchPage from './SearchPage';
 
-import {
-    filmsData,
-    searchValueData,
-    searchOptionsData,
-    sortOptionsData
-} from '../../../__mocks__/constantsMock';
-
 describe('SearchPage', () => {
-    const simpleFakeFunction = () => {};
+    const mockStore = configureStore()({});
 
     let component;
 
     beforeEach(() => {
-        component = shallow(<SearchPage
-            films={filmsData}
-            routeToHomePage={simpleFakeFunction}
-            goToMoviePage={simpleFakeFunction}
-        />);
+        mockStore.dispatch = jest.fn();
+        component = shallow(<SearchPage store={mockStore} />).dive();
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it('should render correctly', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should change searchOption state', () => {
-        component.find('HeaderContainer').props().handleToggleSearchCriteria();
-        expect(component.state().searchOption).toBe(searchOptionsData.genre);
-        component.find('HeaderContainer').props().handleToggleSearchCriteria();
-        expect(component.state().searchOption).toBe(searchOptionsData.title);
-    });
-
-    it('should change sortOption state', () => {
-        component.find('SearchResultsContainer').props().handleSortOption();
-        expect(component.state().sortOption).toBe(sortOptionsData.rating);
-        component.find('SearchResultsContainer').props().handleSortOption();
-        expect(component.state().sortOption).toBe(sortOptionsData.release);
-    });
-
-    describe('should change searchResults to', () => {
-        it('default array', () => {
-            component.find('HeaderContainer').props().handleSearchSubmit('');
-            expect(component.state().results).toEqual(expect.arrayContaining(filmsData));
-        });
-
-        it('search array', () => {
-            component.find('HeaderContainer').props().handleSearchSubmit(searchValueData);
-            expect(component.state().results).toEqual(expect.arrayContaining([filmsData[1]]));
-        });
+    it('should dispatch event to request data', () => {
+        expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
+        // TODO: There is async action should be called here. Check it properly later
+        expect(mockStore.dispatch).toHaveBeenCalledWith(expect.any(Function));
     });
 });

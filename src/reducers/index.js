@@ -11,10 +11,15 @@ import {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case OPEN_MOVIE_PAGE:
+        case UPDATE_SEARCH_VALUE:
             return {
                 ...state,
-                movieData: action.payload,
+                searchValue: action.payload,
+            };
+        case UPDATE_SEARCH_OPTION:
+            return {
+                ...state,
+                searchOption: action.payload,
             };
         case UPDATE_SORT_OPTION:
             // eslint-disable-next-line no-case-declarations
@@ -29,15 +34,10 @@ const rootReducer = (state = initialState, action) => {
                 }),
 
             };
-        case UPDATE_SEARCH_OPTION:
+        case OPEN_MOVIE_PAGE:
             return {
                 ...state,
-                searchOption: action.payload,
-            };
-        case UPDATE_SEARCH_VALUE:
-            return {
-                ...state,
-                searchValue: action.payload,
+                movieData: action.payload,
             };
         case SAVE_FILM_LIST:
             return {

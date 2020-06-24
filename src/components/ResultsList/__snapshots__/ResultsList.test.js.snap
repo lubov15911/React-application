@@ -12,35 +12,6 @@ exports[`ResultsList should render correctly films array 1`] = `
 <div
   className="search-results false"
 >
-  <MoviesList
-    films={
-      Array [
-        Object {
-          "genres": Array [
-            "Adventure",
-            "Comedy",
-            "Family",
-            "Animation",
-          ],
-          "id": 354912,
-          "poster_path": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg",
-          "release_date": "2017-10-27",
-          "title": "Coco",
-        },
-        Object {
-          "genres": Array [
-            "Adventure",
-            "Science Fiction",
-            "Action",
-          ],
-          "id": 333339,
-          "poster_path": "https://image.tmdb.org/t/p/w500/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg",
-          "release_date": "2018-03-28",
-          "title": "Ready Player One",
-        },
-      ]
-    }
-    raiseClickEvent={[Function]}
-  />
+  <Connect(MoviesList) />
 </div>
 `;

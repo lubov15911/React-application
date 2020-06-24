@@ -1,24 +1,49 @@
 import React from 'react';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import ResultsHeader from './ResultsHeader';
 
-import { filmsData, searchOptionsData } from '../../../__mocks__/constantsMock';
+import { updateSortOption } from '../../actions';
+import { filmsData, sortOptionsData, moviePreviewData } from '../../../__mocks__/constantsMock';
 
 describe('ResultsHeader', () => {
-    const spyFakeFunction = jest.fn();
-
-    let component;
+    let mockStore, initState, component;
 
     beforeEach(() => {
-        component = shallow(<ResultsHeader
-            resultsAmount={filmsData.length}
-            handleSortOption={spyFakeFunction}
-            sortOption={searchOptionsData.title}
-        />);
+        initState = {
+            films: filmsData,
+            sortOption: sortOptionsData.release,
+            movieData: moviePreviewData,
+        };
     });
 
-    it('should render correctly', () => {
+    it('should render correctly without movieData', () => {
+        initState.movieData = null;
+        mockStore = configureStore()(initState);
+        component = shallow(<ResultsHeader store={mockStore} />).dive();
+
         expect(component).toMatchSnapshot();
+    });
+
+    it('should render correctly with movieData', () => {
+        mockStore = configureStore()(initState);
+        component = shallow(<ResultsHeader store={mockStore} />).dive();
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it('should handle toggle option', () => {
+        const toggleEvent = { currentTarget: { value: sortOptionsData.rating } };
+
+        mockStore = configureStore()(initState);
+        mockStore.dispatch = jest.fn();
+
+        component = shallow(<ResultsHeader store={mockStore} />).dive();
+        component.find('ToggleComponent').props().handleToggle(toggleEvent);
+
+        expect(mockStore.dispatch).toHaveBeenCalledWith(updateSortOption(sortOptionsData.rating));
+
+        jest.clearAllMocks();
     });
 });
