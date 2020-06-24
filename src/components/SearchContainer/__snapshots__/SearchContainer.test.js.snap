@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchContainer should render correctly with props 1`] = `
+<div
+  className="search-header"
+>
+  <h1
+    className="search-title"
+  >
+    Find your movie
+  </h1>
+  <SearchBar
+    handleSearchValue={[Function]}
+    handleSubmit={[Function]}
+    searchValue="Ready"
+  />
+  <ToggleComponent
+    handleToggle={[Function]}
+    options={
+      Object {
+        "first": "Title",
+        "second": "Genre",
+      }
+    }
+    selected="Title"
+    toggleType="Search"
+  />
+</div>
+`;

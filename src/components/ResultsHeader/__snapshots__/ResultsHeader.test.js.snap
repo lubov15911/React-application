@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsHeader should render correctly 1`] = `
+<div
+  className="results-header"
+>
+  <p>
+    <b>
+      2
+       movie found
+    </b>
+  </p>
+  <ToggleComponent
+    className="toggle1"
+    handleToggle={[MockFunction]}
+    options={
+      Object {
+        "first": "Release date",
+        "second": "Rating",
+      }
+    }
+    selected="Title"
+    toggleType="Sort"
+  />
+</div>
+`;

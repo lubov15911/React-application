@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard should render correctly 1`] = `
+<div
+  className="movie-card"
+>
+  <img
+    alt=""
+    className="movie-card-poster"
+    src="https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg"
+  />
+  <div
+    className="movie-card-info"
+  >
+    <div
+      className="movie-card-info-header"
+    >
+      <h1
+        className="movie-card-info-title"
+      >
+        Coco
+      </h1>
+      <div
+        className="movie-card-info-rating"
+      >
+        <span>
+          7.8
+        </span>
+      </div>
+    </div>
+    <p
+      className="movie-card-info-tagline"
+    >
+      The celebration of a lifetime
+    </p>
+    <div>
+      <span
+        className="movie-card-highlight"
+      >
+        2017
+      </span>
+       year
+      <span
+        className="movie-card-highlight"
+      >
+        105
+      </span>
+       min
+    </div>
+    <p
+      className="movie-card-description"
+    >
+      Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz.
+    </p>
+  </div>
+</div>
+`;

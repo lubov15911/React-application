@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleComponent should render correctly 1`] = `
+<div
+  className="toggler"
+>
+  <p>
+    Sort
+    By
+  </p>
+  <input
+    checked={false}
+    id="first-option-Sort"
+    name="toggler-Sort"
+    onChange={[MockFunction]}
+    type="radio"
+  />
+  <label
+    htmlFor="first-option-Sort"
+  />
+  <input
+    checked={false}
+    id="second-option-Sort"
+    name="toggler-Sort"
+    onChange={[MockFunction]}
+    type="radio"
+  />
+  <label
+    htmlFor="second-option-Sort"
+  />
+</div>
+`;
