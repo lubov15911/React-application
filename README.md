@@ -13,3 +13,16 @@
 #### Error handling
 1) insert 'error' into search input
 2) to return to home page refresh the page
+
+
+## Testing
+
+### Unit testing:
+1) Run `npm test`
+2) Open `/coverage/Icov-report/index.html` to see coverage
+
+### E2E Testing
+0) Run app: `npm start`
+1) Run `npm run e2e`
+2) In the opened Cypress window click on `firstScenario.spec.js` file from `cypress/integration/` folder
+3) Observe test running

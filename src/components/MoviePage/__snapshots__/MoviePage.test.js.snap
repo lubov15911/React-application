@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviePage should render correctly 1`] = `
+<Fragment>
+  <HeaderContainer
+    handleSearchSubmit={null}
+    handleSearchValue={null}
+    handleToggleSearchCriteria={null}
+    movieData={null}
+    searchOption={null}
+    searchValue={null}
+  />
+  <SearchResultsContainer
+    films={Array []}
+    handleSelectMovie={[Function]}
+    handleSortOption={[Function]}
+    sortOption="Release date"
+    total={0}
+  />
+</Fragment>
+`;

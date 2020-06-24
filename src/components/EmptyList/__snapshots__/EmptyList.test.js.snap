@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyList should render correctly with no props 1`] = `
+<span
+  className="empty-list-title"
+>
+  No films found
+</span>
+`;

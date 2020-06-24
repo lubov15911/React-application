@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesListItem should render correctly 1`] = `
+<li
+  className="movie-preview"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+>
+  <img
+    alt=""
+    className="movie-preview-poster"
+    src="https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg"
+  />
+  <div
+    className="movie-preview-header"
+  >
+    <p>
+      Coco
+    </p>
+    <div
+      className="movie-preview-year"
+    >
+      <span>
+        2017
+      </span>
+    </div>
+  </div>
+  <span
+    className="movie-preview-genre"
+  >
+    Adventure, Comedy, Family, Animation
+  </span>
+</li>
+`;
