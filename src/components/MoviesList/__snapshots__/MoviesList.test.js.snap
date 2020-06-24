@@ -4,7 +4,7 @@ exports[`MoviesList should render correctly 1`] = `
 <ul
   className="movies-list"
 >
-  <MoviesListItem
+  <Connect(MoviesListItem)
     key="354912"
     movieData={
       Object {
@@ -20,9 +20,25 @@ exports[`MoviesList should render correctly 1`] = `
         "title": "Coco",
       }
     }
-    raiseClickEvent={[Function]}
   />
-  <MoviesListItem
+  <Connect(MoviesListItem)
+    key="269149"
+    movieData={
+      Object {
+        "genres": Array [
+          "Animation",
+          "Adventure",
+          "Family",
+          "Comedy",
+        ],
+        "id": 269149,
+        "poster_path": "https://image.tmdb.org/t/p/w500/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg",
+        "release_date": "2016-02-11",
+        "title": "Zootopia",
+      }
+    }
+  />
+  <Connect(MoviesListItem)
     key="333339"
     movieData={
       Object {
@@ -37,7 +53,21 @@ exports[`MoviesList should render correctly 1`] = `
         "title": "Ready Player One",
       }
     }
-    raiseClickEvent={[Function]}
+  />
+  <Connect(MoviesListItem)
+    key="337167"
+    movieData={
+      Object {
+        "genres": Array [
+          "Drama",
+          "Romance",
+        ],
+        "id": 337167,
+        "poster_path": "https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg",
+        "release_date": "2018-03-28",
+        "title": "Fifty Shades Freed",
+      }
+    }
   />
 </ul>
 `;

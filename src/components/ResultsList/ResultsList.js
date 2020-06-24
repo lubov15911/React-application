@@ -1,27 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import EmptyList from '../EmptyList';
 import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 
-const PROP_TYPES = {
+const propTypes = {
     resultsAmount: PropTypes.number.isRequired,
-    films: PropTypes.arrayOf(PropTypes.object).isRequired,
-    raiseClickEvent: PropTypes.func.isRequired,
 };
 
-const ResultsList = ({ resultsAmount, films, raiseClickEvent, }) => {
+const ResultsList = ({ resultsAmount, }) => {
     return (
         <div className={`search-results ${!resultsAmount && 'no-items'}`}>
-            {resultsAmount ?
-                <MoviesList films={films} raiseClickEvent={raiseClickEvent} /> :
-                <EmptyList />
-            }
+            {resultsAmount ? <MoviesList /> : <EmptyList />}
         </div>
     );
 };
-ResultsList.propTypes = PROP_TYPES;
+ResultsList.propTypes = propTypes;
 
-export default ResultsList;
+const mapStateToProps = state => {
+    return {
+        resultsAmount: state.films.length,
+    }
+};
+export default connect(mapStateToProps)(ResultsList);

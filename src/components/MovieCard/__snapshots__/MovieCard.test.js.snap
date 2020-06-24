@@ -45,7 +45,7 @@ exports[`MovieCard should render correctly 1`] = `
       >
         105
       </span>
-       min
+      min
     </div>
     <p
       className="movie-card-description"

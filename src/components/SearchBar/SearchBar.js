@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './SearchBar.scss';
 
-const PROP_TYPES = {
-    handleSubmit: PropTypes.func.isRequired,
+import { asyncGetMovies, updateSearchValue } from '../../actions';
+
+const propTypes = {
+    sendSearchRequest: PropTypes.func.isRequired,
     handleSearchValue: PropTypes.func.isRequired,
     searchValue: PropTypes.string.isRequired,
+    searchOption: PropTypes.string.isRequired,
+    sortOption: PropTypes.string.isRequired,
 };
 
-const SearchBar = ({ handleSubmit, handleSearchValue, searchValue, }) => {
+const SearchBar = ({ sendSearchRequest, handleSearchValue, searchValue, searchOption, sortOption, }) => {
     const onSubmit = (event) => {
-        handleSubmit(searchValue);
+        sendSearchRequest(searchValue, searchOption, sortOption);
         event.preventDefault();
     };
 
@@ -24,6 +29,14 @@ const SearchBar = ({ handleSubmit, handleSearchValue, searchValue, }) => {
         </form>
     );
 };
-SearchBar.propTypes = PROP_TYPES;
+SearchBar.propTypes = propTypes;
 
-export default SearchBar;
+const mapStateToProps = state => {
+    return {
+        searchOption: state.searchOption,
+        sortOption: state.sortOption,
+        searchValue: state.searchValue,
+    }
+};
+export default connect(mapStateToProps, { handleSearchValue: updateSearchValue, sendSearchRequest: asyncGetMovies })(SearchBar);
+

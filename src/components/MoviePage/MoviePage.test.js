@@ -1,31 +1,33 @@
 import React from 'react';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import MoviePage from './MoviePage';
+import { moviePreviewData } from '../../../__mocks__/constantsMock';
 
 describe('MoviePage', () => {
-    const movieId = 354912;
-    const Films = { data: [] };
-    const simpleFakeFunction = () => {};
+    const mockStore = configureStore()({
+        movieData: moviePreviewData,
+    });
 
     let component;
 
     beforeEach(() => {
-        component = shallow(<MoviePage
-            movieId={movieId}
-            films={Films.data}
-            routeToHomePage={simpleFakeFunction}
-            goToMoviePage={simpleFakeFunction}/>);
+        mockStore.dispatch = jest.fn();
+        component = shallow(<MoviePage store={mockStore} />).dive();
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it('should render correctly', () => {
         expect(component).toMatchSnapshot();
     });
 
-    it('should change sortOption state', () => {
-        component.find('SearchResultsContainer').props().handleSortOption();
-        expect(component.state().sortOption).toBe('Rating');
-        component.find('SearchResultsContainer').props().handleSortOption();
-        expect(component.state().sortOption).toBe('Release date');
+    it('should dispatch event to request data', () => {
+        expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
+        // TODO: There is async action should be called here. Check it properly later
+        expect(mockStore.dispatch).toHaveBeenCalledWith(expect.any(Function));
     });
 });

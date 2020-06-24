@@ -1,26 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ResultsHeader should render correctly 1`] = `
+exports[`ResultsHeader should render correctly with movieData 1`] = `
 <div
   className="results-header"
 >
   <p>
-    <b>
-      2
-       movie found
-    </b>
+    Films by 
+    Adventure
+     genre
   </p>
   <ToggleComponent
     className="toggle1"
-    handleToggle={[MockFunction]}
+    handleToggle={[Function]}
     options={
       Object {
         "first": "Release date",
         "second": "Rating",
       }
     }
-    selected="Title"
-    toggleType="Sort"
+    selected="Release date"
+    toggleType="Sort "
+  />
+</div>
+`;
+
+exports[`ResultsHeader should render correctly without movieData 1`] = `
+<div
+  className="results-header"
+>
+  <p>
+    <b>
+      4
+       movie found
+    </b>
+  </p>
+  <ToggleComponent
+    className="toggle1"
+    handleToggle={[Function]}
+    options={
+      Object {
+        "first": "Release date",
+        "second": "Rating",
+      }
+    }
+    selected="Release date"
+    toggleType="Sort "
   />
 </div>
 `;

@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './MovieCard.scss';
 
-const PROP_TYPES = {
+const propTypes = {
     movieData: PropTypes.shape({
         poster_path: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         vote_average: PropTypes.number.isRequired,
         release_date: PropTypes.string.isRequired,
         tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
+        runtime: PropTypes.number,
         overview: PropTypes.string.isRequired,
     }).isRequired,
 };
@@ -26,12 +27,18 @@ const MovieCard = ({ movieData: { poster_path, title, vote_average, tagline, rel
             <p className="movie-card-info-tagline">{tagline}</p>
             <div>
                 <span className="movie-card-highlight">{release_date.slice(0, 4)}</span> year
-                <span className="movie-card-highlight">{runtime}</span> min
+                {runtime &&(<span className="movie-card-highlight">{runtime}</span>)}
+                {runtime && 'min'}
             </div>
             <p className="movie-card-description">{overview}</p>
         </div>
     </div>
 );
-MovieCard.propTypes = PROP_TYPES;
+MovieCard.propTypes = propTypes;
 
-export default MovieCard;
+const mapStateToProps = (state) => {
+    return {
+        movieData: state.movieData,
+    }
+};
+export default connect(mapStateToProps)(MovieCard);

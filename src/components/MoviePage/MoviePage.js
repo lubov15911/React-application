@@ -1,50 +1,46 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import HeaderContainer from '../HeaderContainer';
-import SearchResultsContainer from '../SearchResultsContainer';
+import ResultsHeader from '../ResultsHeader';
+import ResultsList from '../ResultsList';
 
-import { SortOptions } from '../../constants';
+import { asyncGetMovies } from '../../actions';
+import { SearchOptions } from '../../constants';
 
-export default class MoviePage extends PureComponent {
+class MoviePage extends PureComponent {
     static propTypes = {
-        films: PropTypes.arrayOf(PropTypes.object).isRequired,
-        goToMoviePage: PropTypes.func.isRequired,
+        requestData: PropTypes.func.isRequired,
+        movieData: PropTypes.shape({
+            genres: PropTypes.array.isRequired,
+        }).isRequired,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            sortOption: SortOptions.first,
-        };
-        this.updateSortOption = this.updateSortOption.bind(this);
-    }
+    componentDidMount() {
+        const {
+            requestData,
+            movieData,
+        } = this.props;
 
-    updateSortOption() {
-        const { sortOption, } = this.state;
-        const selectedValue = (sortOption === SortOptions.first) ? SortOptions.second : SortOptions.first;
-        this.setState({ sortOption: selectedValue });
+        requestData(movieData.genres[0], SearchOptions.second);
     }
 
     render() {
-        const {
-            films,
-            goToMoviePage,
-        } = this.props;
-        const {
-            sortOption,
-        } = this.state;
-
         return (
             <Fragment>
-                <HeaderContainer movieData={films[5]} />
-                <SearchResultsContainer
-                    total={films.length}
-                    films={films}
-                    handleSelectMovie={goToMoviePage}
-                    sortOption={sortOption}
-                    handleSortOption={this.updateSortOption} />
+                <HeaderContainer />
+                <ResultsHeader />
+                <ResultsList />
             </Fragment>
-        );
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        movieData: state.movieData,
     }
 };
+
+export default connect(mapStateToProps, { requestData: asyncGetMovies })(MoviePage);

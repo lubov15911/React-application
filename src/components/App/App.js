@@ -1,4 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import SearchPage from '../SearchPage';
 import MoviePage from '../MoviePage';
@@ -6,31 +8,23 @@ import ErrorBoundary from '../ErrorBoundary';
 
 import './App.scss';
 
-import FILMS from '../../data/films.json';
+const propTypes = {
+    hasMovieData: PropTypes.bool.isRequired,
+};
 
-export default class App extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            movieId: null
-        };
-        this.goToMoviePage = this.goToMoviePage.bind(this);
-    }
+const App = ({ hasMovieData }) => (
+    <ErrorBoundary>
+        <div className="app">
+            {hasMovieData ? <MoviePage /> : <SearchPage />}
+        </div>
+    </ErrorBoundary>
+);
+App.propTypes = propTypes;
 
-    goToMoviePage(movieId) {
-        this.setState({ movieId });
-    }
-
-    render() {
-        const { movieId, } = this.state;
-
-        return (
-            <ErrorBoundary>
-                <div className="app">
-                    {movieId ? <MoviePage films={FILMS.data} goToMoviePage={this.goToMoviePage} /> :
-                        <SearchPage films={FILMS.data} goToMoviePage={this.goToMoviePage} />}
-                </div>
-            </ErrorBoundary>
-        );
+const mapStateToProps = (state) => {
+    return {
+        hasMovieData: !!state.movieData,
     }
 };
+
+export default connect(mapStateToProps)(App);
