@@ -3,19 +3,21 @@ import { shallow } from 'enzyme';
 
 import SearchBar from './SearchBar';
 
+import { searchValueData } from '../../../__mocks__/constantsMock';
+
 describe('SearchBar', () => {
-    const fakeFunctionSubmit = jest.fn();
-    const fakeFunctionSearchValue= jest.fn();
-    const searchValue = 'Tarantino';
+    const spyFakeFunctionSubmit = jest.fn();
+    const spyFakeFunctionSearchValue= jest.fn();
+
     let changeEvent;
     let component;
 
     beforeEach(() => {
-        changeEvent = { target: { value: searchValue } };
+        changeEvent = { target: { value: searchValueData } };
         component = shallow(<SearchBar
-            searchValue={searchValue}
-            handleSubmit={fakeFunctionSubmit}
-            handleSearchValue={fakeFunctionSearchValue} />);
+            searchValue={searchValueData}
+            handleSubmit={spyFakeFunctionSubmit}
+            handleSearchValue={spyFakeFunctionSearchValue} />);
     });
 
     it('should render correctly', () => {
@@ -24,13 +26,13 @@ describe('SearchBar', () => {
 
     it('should change value state', () => {
         component.find('input').simulate('change', changeEvent);
-        expect(fakeFunctionSearchValue).toHaveBeenCalledWith(searchValue);
+        expect(spyFakeFunctionSearchValue).toHaveBeenCalledWith(searchValueData);
     });
 
     it('should submit current search value', () => {
         const submitEvent = { preventDefault: () => {} };
         component.find('input').simulate('change', changeEvent);
         component.find('form').simulate('submit', submitEvent);
-        expect(fakeFunctionSubmit).toHaveBeenCalledWith(searchValue);
+        expect(spyFakeFunctionSubmit).toHaveBeenCalledWith(searchValueData);
     });
 });

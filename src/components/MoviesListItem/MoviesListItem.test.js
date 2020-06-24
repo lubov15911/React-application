@@ -3,23 +3,18 @@ import { shallow } from 'enzyme';
 
 import MoviesListItem from './MoviesListItem';
 
+import { filmsData } from '../../../__mocks__/constantsMock';
+
 describe('MoviesListItem', () => {
-    const item = {
-        id: 354912,
-        poster_path: 'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
-        title: 'Coco',
-        release_date: '2017-10-27',
-        genres: ["Adventure", "Comedy", "Family", "Animation"],
-    };
-    const fakeFunction = jest.fn();
+    const spyFakeFunction = jest.fn();
 
     let component;
 
     beforeEach(() => {
         component = shallow(<MoviesListItem
-            movieData={item}
-            key={item.id}
-            raiseClickEvent={fakeFunction}
+            movieData={filmsData[0]}
+            key={filmsData[0].id}
+            raiseClickEvent={spyFakeFunction}
         />);
     });
 
@@ -29,6 +24,6 @@ describe('MoviesListItem', () => {
 
     it('should raise click event', () => {
         component.find('li.movie-preview').simulate('click');
-        expect(fakeFunction).toHaveBeenCalledWith(354912);
+        expect(spyFakeFunction).toHaveBeenCalledWith(filmsData[0].id);
     });
 });

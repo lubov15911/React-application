@@ -3,17 +3,18 @@ import { shallow } from 'enzyme';
 
 import ResultsHeader from './ResultsHeader';
 
+import { filmsData, searchOptionsData } from '../../../__mocks__/constantsMock';
+
 describe('ResultsHeader', () => {
-    const total = 0;
-    const sortOption = 'Title';
-    const fakeFunction = jest.fn();
+    const spyFakeFunction = jest.fn();
+
     let component;
 
     beforeEach(() => {
         component = shallow(<ResultsHeader
-            resultsAmount={total}
-            handleSortOption={fakeFunction}
-            sortOption={sortOption}
+            resultsAmount={filmsData.length}
+            handleSortOption={spyFakeFunction}
+            sortOption={searchOptionsData.title}
         />);
     });
 

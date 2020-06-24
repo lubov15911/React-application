@@ -3,28 +3,16 @@ import { shallow } from 'enzyme';
 
 import ResultsList from './ResultsList';
 
+import { filmsData } from '../../../__mocks__/constantsMock';
+
 describe('ResultsList', () => {
-    const fakeFunction = () => {};
+    const simpleFakeFunction = () => {};
 
     it('should render correctly films array', () => {
-        const films = [{
-            id: 354912,
-            poster_path: 'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
-            title: 'Coco',
-            release_date: '2017-10-27',
-            genres: ["Adventure", "Comedy", "Family", "Animation"],
-        }, {
-            id: 333339,
-            poster_path: 'https://image.tmdb.org/t/p/w500/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg',
-            title: 'Ready Player One',
-            release_date: '2018-03-28',
-            genres: ["Adventure", "Science Fiction", "Action"],
-        }] ;
-
         const component = shallow(<ResultsList
-            resultsAmount={films.length}
-            films={films}
-            raiseClickEvent={fakeFunction}
+            resultsAmount={filmsData.length}
+            films={filmsData}
+            raiseClickEvent={simpleFakeFunction}
         />);
 
         expect(component).toMatchSnapshot();
@@ -36,7 +24,7 @@ describe('ResultsList', () => {
         const component = shallow(<ResultsList
             resultsAmount={films.length}
             films={films}
-            raiseClickEvent={fakeFunction}
+            raiseClickEvent={simpleFakeFunction}
         />);
 
         expect(component).toMatchSnapshot();

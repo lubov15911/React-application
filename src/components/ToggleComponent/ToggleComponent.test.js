@@ -3,21 +3,20 @@ import { shallow } from 'enzyme';
 
 import ToggleComponent from './ToggleComponent';
 
+import { sortOptionsData } from '../../../__mocks__/constantsMock';
+
 describe('ToggleComponent', () => {
     const toggleType = 'Sort';
-    const SortOptions = {
-        first: 'Release date',
-        second: 'Rating'
-    };
-    const fakeFunction = jest.fn();
+    const spyFakeFunction = jest.fn();
+
     let component;
 
     beforeEach(() => {
         component = shallow(<ToggleComponent
             toggleType={toggleType}
-            options={SortOptions}
-            selected={SortOptions.first}
-            handleToggle={fakeFunction}
+            options={sortOptionsData}
+            selected={sortOptionsData.release}
+            handleToggle={spyFakeFunction}
         />);
     });
 
@@ -27,6 +26,6 @@ describe('ToggleComponent', () => {
 
     it('should call handleToggle from props', () => {
         component.find(`input#second-option-${toggleType}`).props().onChange();
-        expect(fakeFunction).toHaveBeenCalled();
+        expect(spyFakeFunction).toHaveBeenCalled();
     });
 });
