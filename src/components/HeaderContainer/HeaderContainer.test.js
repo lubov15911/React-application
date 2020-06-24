@@ -3,24 +3,17 @@ import { shallow } from 'enzyme';
 
 import HeaderContainer from './HeaderContainer';
 
+import { moviePreviewData } from '../../../__mocks__/constantsMock';
+
 describe('HeaderContainer', () => {
     it('should render correctly', () => {
-        const fakeFunction = () => {};
-        const mockData = {
-            poster_path: 'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
-            title: 'Coco',
-            vote_average: 7.8,
-            tagline: 'The celebration of a lifetime',
-            release_date: '2017-10-27',
-            runtime: 105,
-            overview: 'Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz.',
-        };
+        const simpleFakeFunction = () => {};
 
         const component = shallow(<HeaderContainer
-            movieData={mockData}
-            handleSearchValue={fakeFunction}
-            handleSearchSubmit={fakeFunction}
-            handleToggleSearchCriteria={fakeFunction}
+            movieData={moviePreviewData}
+            handleSearchValue={simpleFakeFunction}
+            handleSearchSubmit={simpleFakeFunction}
+            handleToggleSearchCriteria={simpleFakeFunction}
             searchValue={''}
             searchOption={'Title'}
         />);

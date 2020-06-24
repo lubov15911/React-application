@@ -3,20 +3,21 @@ import { shallow } from 'enzyme';
 
 import SearchContainer from './SearchContainer';
 
+import { searchValueData, searchOptionsData } from '../../../__mocks__/constantsMock';
+
 describe('SearchContainer', () => {
+    const simpleFakeFunction = () => {};
+    const spyFakeFunctionSearchSubmit = jest.fn();
+
     let component;
-    const fakeFunction = () => {};
-    const fakeSearchOption = 'Title';
-    const fakeSearchValue = '';
-    const fakeHandleSearchSubmit = jest.fn();
 
     beforeEach(() => {
         component = shallow(<SearchContainer
-            handleSearchValue={fakeFunction}
-            handleSearchSubmit={fakeHandleSearchSubmit}
-            toggleSearch={fakeFunction}
-            searchOption={fakeSearchOption}
-            searchValue={fakeSearchValue}
+            handleSearchValue={simpleFakeFunction}
+            handleSearchSubmit={spyFakeFunctionSearchSubmit}
+            toggleSearch={simpleFakeFunction}
+            searchOption={searchOptionsData.title}
+            searchValue={searchValueData}
         />);
     });
 
@@ -38,7 +39,7 @@ describe('SearchContainer', () => {
     it('should change state of error - false', () => {
         let error;
         try {
-            component.find('SearchBar').props().handleSubmit('Lubov');
+            component.find('SearchBar').props().handleSubmit(searchValueData);
             expect(component.state().error).toBeFalsy();
         } catch (e) {
             error = e;
@@ -47,8 +48,7 @@ describe('SearchContainer', () => {
     });
 
     it('should call search request', () => {
-        let searchValue = 'Lubov';
-        component.find('SearchBar').props().handleSubmit(searchValue);
-        expect(fakeHandleSearchSubmit).toHaveBeenCalledWith(searchValue.toLocaleLowerCase());
+        component.find('SearchBar').props().handleSubmit(searchValueData);
+        expect(spyFakeFunctionSearchSubmit).toHaveBeenCalledWith(searchValueData.toLocaleLowerCase());
     });
 });

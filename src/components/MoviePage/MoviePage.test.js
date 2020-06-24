@@ -6,7 +6,7 @@ import MoviePage from './MoviePage';
 describe('MoviePage', () => {
     const movieId = 354912;
     const Films = { data: [] };
-    const fakeFunction = () => {};
+    const simpleFakeFunction = () => {};
 
     let component;
 
@@ -14,8 +14,8 @@ describe('MoviePage', () => {
         component = shallow(<MoviePage
             movieId={movieId}
             films={Films.data}
-            routeToHomePage={fakeFunction}
-            goToMoviePage={fakeFunction}/>);
+            routeToHomePage={simpleFakeFunction}
+            goToMoviePage={simpleFakeFunction}/>);
     });
 
     it('should render correctly', () => {

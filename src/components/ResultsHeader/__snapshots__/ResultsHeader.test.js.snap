@@ -4,7 +4,12 @@ exports[`ResultsHeader should render correctly 1`] = `
 <div
   className="results-header"
 >
-  0
+  <p>
+    <b>
+      2
+       movie found
+    </b>
+  </p>
   <ToggleComponent
     className="toggle1"
     handleToggle={[MockFunction]}
