@@ -24,6 +24,6 @@ describe('MoviesListItem', () => {
 
     it('should raise click event', () => {
         component.find('li.movie-preview').simulate('click');
-        expect(spyFakeFunction).toHaveBeenCalledWith(354912);
+        expect(spyFakeFunction).toHaveBeenCalledWith(filmsData[0].id);
     });
 });
