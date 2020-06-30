@@ -4,7 +4,8 @@ import {
     OPEN_MOVIE_PAGE,
     UPDATE_SEARCH_VALUE,
     UPDATE_SORT_OPTION,
-    UPDATE_SEARCH_OPTION
+    UPDATE_SEARCH_OPTION,
+    RESET_PAGE_STATE,
 } from '../constants/actions';
 
 const fetch = require('node-fetch');
@@ -67,4 +68,8 @@ export const updateSortOption = (value) => ({
 export const updateSearchOption = (value) => ({
     type: UPDATE_SEARCH_OPTION,
     payload: value,
+});
+
+export const resetState = () => ({
+    type: RESET_PAGE_STATE
 });

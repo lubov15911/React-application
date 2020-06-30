@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import './MoviesListItem.scss';
-
-import { asyncGetMovieData } from '../../actions';
 
 const propTypes = {
     movieData: PropTypes.shape({
@@ -14,11 +13,14 @@ const propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.array.isRequired,
     }).isRequired,
-    goToMoviePage: PropTypes.func.isRequired,
 };
 
-const MoviesListItem = ({ movieData, goToMoviePage, }) => {
-    const handleClick = () => goToMoviePage(movieData.id);
+const MoviesListItem = ({ movieData }) => {
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push(`/film/${movieData.id}`);
+    };
 
     return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -34,4 +36,4 @@ const MoviesListItem = ({ movieData, goToMoviePage, }) => {
 };
 MoviesListItem.propTypes = propTypes;
 
-export default connect(null, { goToMoviePage: asyncGetMovieData })(MoviesListItem);
+export default connect(null)(MoviesListItem);
