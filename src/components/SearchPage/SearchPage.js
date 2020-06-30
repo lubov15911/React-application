@@ -1,6 +1,7 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, useEffect  } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import HeaderContainer from '../HeaderContainer';
 import ResultsHeader from '../ResultsHeader';
@@ -8,25 +9,35 @@ import ResultsList from '../ResultsList';
 
 import { asyncGetMovies } from '../../actions';
 
-class SearchPage extends PureComponent {
-    static propTypes = {
-        requestDefaultData: PropTypes.func.isRequired,
-    };
+const propTypes = {
+    searchOption: PropTypes.string.isRequired,
+    sortOption: PropTypes.string.isRequired,
+    requestDefaultData: PropTypes.func.isRequired,
+};
 
-    componentDidMount() {
-        const { requestDefaultData } = this.props;
-        requestDefaultData();
+const SearchPage = ({ searchOption, sortOption, requestDefaultData }) => {
+    const query = new URLSearchParams(useLocation().search);
+
+    useEffect(() => {
+        const querySearchValue = query.get('search');
+        requestDefaultData(querySearchValue, searchOption, sortOption);
+    });
+
+    return (
+        <Fragment>
+            <HeaderContainer />
+            <ResultsHeader />
+            <ResultsList />
+        </Fragment>
+    );
+};
+SearchPage.propTypes = propTypes;
+
+const mapStateToProps = (state) => {
+    return {
+        searchOption: state.searchOption,
+        sortOption: state.sortOption,
     }
+};
 
-    render() {
-        return (
-            <Fragment>
-                <HeaderContainer />
-                <ResultsHeader />
-                <ResultsList />
-            </Fragment>
-        );
-    }
-}
-
-export default connect(null, { requestDefaultData: asyncGetMovies })(SearchPage);
+export default connect(mapStateToProps, { requestDefaultData: asyncGetMovies })(SearchPage);

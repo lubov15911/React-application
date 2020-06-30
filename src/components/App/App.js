@@ -1,30 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from 'react-router-dom';
 
+import ErrorBoundary from '../ErrorBoundary';
 import SearchPage from '../SearchPage';
 import MoviePage from '../MoviePage';
-import ErrorBoundary from '../ErrorBoundary';
+import EmptyPage from '../EmptyPage';
+import NotFound from '../NotFound';
 
 import './App.scss';
 
-const propTypes = {
-    hasMovieData: PropTypes.bool.isRequired,
-};
-
-const App = ({ hasMovieData }) => (
-    <ErrorBoundary>
-        <div className="app">
-            {hasMovieData ? <MoviePage /> : <SearchPage />}
-        </div>
-    </ErrorBoundary>
+const App = () => (
+    <Router>
+        <ErrorBoundary>
+            <div className="app">
+                <Switch >
+                    <Route path="/search" component={SearchPage} />
+                    <Route path="/film/:id" component={MoviePage} />
+                    <Route exact path="/" component={EmptyPage} />
+                    <Route path="*" component={NotFound} />
+                </Switch>
+            </div>
+        </ErrorBoundary>
+    </Router>
 );
-App.propTypes = propTypes;
 
-const mapStateToProps = (state) => {
-    return {
-        hasMovieData: !!state.movieData,
-    }
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

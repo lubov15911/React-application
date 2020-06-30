@@ -7,6 +7,7 @@ import {
     UPDATE_SEARCH_OPTION,
     UPDATE_SEARCH_VALUE,
     SAVE_FILM_LIST,
+    RESET_PAGE_STATE,
 } from '../constants/actions';
 
 const rootReducer = (state = initialState, action) => {
@@ -43,6 +44,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 films: action.payload,
+            };
+        case RESET_PAGE_STATE:
+            return {
+                ...state,
+                films: [],
+                movieData: null,
+                searchValue: '',
             };
         default:
             return state;

@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import './SearchBar.scss';
 
-import { asyncGetMovies, updateSearchValue } from '../../actions';
+import { updateSearchValue } from '../../actions';
 
 const propTypes = {
-    sendSearchRequest: PropTypes.func.isRequired,
     handleSearchValue: PropTypes.func.isRequired,
     searchValue: PropTypes.string.isRequired,
-    searchOption: PropTypes.string.isRequired,
-    sortOption: PropTypes.string.isRequired,
 };
 
-const SearchBar = ({ sendSearchRequest, handleSearchValue, searchValue, searchOption, sortOption, }) => {
+const SearchBar = ({ handleSearchValue, searchValue, }) => {
+    const history = useHistory();
+
     const onSubmit = (event) => {
-        sendSearchRequest(searchValue, searchOption, sortOption);
         event.preventDefault();
+        let url = '/search';
+
+        if (searchValue) {
+            url += `?search=${searchValue}`;
+        }
+
+        history.push(url);
     };
 
     const handleChange = ({ target: { value } }) => handleSearchValue(value);
@@ -33,10 +39,7 @@ SearchBar.propTypes = propTypes;
 
 const mapStateToProps = state => {
     return {
-        searchOption: state.searchOption,
-        sortOption: state.sortOption,
         searchValue: state.searchValue,
     }
 };
-export default connect(mapStateToProps, { handleSearchValue: updateSearchValue, sendSearchRequest: asyncGetMovies })(SearchBar);
-
+export default connect(mapStateToProps, { handleSearchValue: updateSearchValue, })(SearchBar);

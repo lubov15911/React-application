@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import ToggleComponent from '../ToggleComponent';
 
@@ -22,12 +23,20 @@ const propTypes = {
 };
 
 const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption }) => {
+    const location = useLocation();
+    let renderHeader = null;
+
+    if (location.pathname.startsWith('/film')) {
+        renderHeader = <p>Films by {movieData && movieData.genres[0]} genre</p>;
+    } else {
+        renderHeader = <p><b>{resultsAmount} movie found</b></p>;
+    }
+
     const handleToggle = ({ currentTarget: { value } }) => toggleSortOption(value);
 
     return (
         <div className="results-header">
-            {movieData ? <p>Films by {movieData.genres[0]} genre</p> :
-                resultsAmount && <p><b>{resultsAmount} movie found</b></p>}
+            {renderHeader}
             <ToggleComponent
                 className="toggle1"
                 toggleType="Sort "
