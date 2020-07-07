@@ -20,7 +20,7 @@ function renderHTML(html, preloadedState) {
                 // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
                 window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
             </script>
-            <script src="bundle.js"></script>
+            <script src="../public/bundle.js"></script>
         </body>
         </html>
     `;

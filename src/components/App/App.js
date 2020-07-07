@@ -36,7 +36,7 @@ const App = ({ Router, location, context, store, }) => (
             <ErrorBoundary>
                 <div className="app">
                     <Switch >
-                        <Route path="/search" component={SearchPage} />
+                        <Route path="/search/:value" component={SearchPage} />
                         <Route path="/film/:id" component={MoviePage} />
                         <Route exact path="/" component={EmptyPage} />
                         <Route path="*" component={NotFound} />

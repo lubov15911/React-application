@@ -20,7 +20,7 @@ const SearchBar = ({ handleSearchValue, searchValue, }) => {
         let url = '/search';
 
         if (searchValue) {
-            url += `?search=${searchValue}`;
+            url += `/${searchValue}`;
         }
 
         history.push(url);

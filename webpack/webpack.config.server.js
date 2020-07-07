@@ -25,6 +25,7 @@ module.exports = merge(Config, {
 
     output: {
         filename: "public/serverRenderer.js",
+        publicPath: "public/",
         libraryTarget: 'commonjs2',
     },
 });
