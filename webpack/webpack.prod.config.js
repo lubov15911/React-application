@@ -5,6 +5,7 @@ const merge = require("webpack-merge");
 const Config = require('./defaultWebpackConfig');
 
 module.exports = merge(Config, {
+    entry: ["babel-polyfill", "./src/index.js"],
     module: {
         rules: [
             {

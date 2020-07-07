@@ -1,27 +1,30 @@
 const path = require("path");
 const merge = require("webpack-merge");
+const nodeExternals = require('webpack-node-externals');
 
-const Config = require('./defaultWebpackConfig');
+const Config = require('./webpack.config.common');
 
 module.exports = merge(Config, {
+    name: 'server',
+    target: 'node',
+
+    entry: './src/serverRenderer.js',
+    externals: [nodeExternals()],
+
     module: {
         rules: [
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    'style-loader',
                     'css-loader',
                     'sass-loader',
                 ],
             }
         ]
     },
-    watch: true,
-    devtool: "source-map",
-    devServer: {
-        contentBase: path.join(__dirname, "public/"),
-        port: 9000,
-        publicPath: "http://localhost:9000/dist/",
-        historyApiFallback: true,
-    }
+
+    output: {
+        filename: "public/serverRenderer.js",
+        libraryTarget: 'commonjs2',
+    },
 });

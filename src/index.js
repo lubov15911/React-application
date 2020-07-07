@@ -1,14 +1,11 @@
-/* global document */
+/* global document, window */
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-
-import store from './store';
+import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from './store';
 
 import App from './components/App';
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root'));
+const store = configureStore(window.PRELOADED_STATE);
+
+hydrate(<App Router={BrowserRouter} store={store} />, document.getElementById('root'));
