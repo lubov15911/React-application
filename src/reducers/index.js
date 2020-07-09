@@ -10,7 +10,19 @@ import {
     RESET_PAGE_STATE,
 } from '../constants/actions';
 
-const rootReducer = (state = initialState, action) => {
+type State = {
+    searchOption: string,
+    searchValue: string,
+    sortOption: string,
+    films: Array<any>,
+    movieData: ?{},
+};
+type Action = {
+    type: string,
+    payload: ?any
+};
+
+const rootReducer = (state: State = initialState, action: Action) => {
     switch (action.type) {
         case UPDATE_SEARCH_VALUE:
             return {
@@ -33,7 +45,6 @@ const rootReducer = (state = initialState, action) => {
                     if (filmA[sortingField] < filmB[sortingField]) return 1;
                     return 0;
                 }),
-
             };
         case OPEN_MOVIE_PAGE:
             return {

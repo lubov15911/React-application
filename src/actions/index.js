@@ -1,3 +1,5 @@
+// @flow
+
 import { URL } from '../constants';
 import {
     SAVE_FILM_LIST,
@@ -12,13 +14,13 @@ const fetch = require('node-fetch');
 const encodeurl = require('encodeurl');
 
 // films actions
-const saveFilmList = (list) => ({
+const saveFilmList = (list: {}[]) => ({
     type: SAVE_FILM_LIST,
     payload: list,
 });
 
-export const asyncGetMovies = (searchValue, searchOption, sortOption) => {
-    return dispatch => {
+export const asyncGetMovies = (searchValue: string, searchOption: string, sortOption: string) => {
+    return (dispatch: any) => {
         let url = `${URL}movies`;
         const queries = [];
         if (sortOption) {
@@ -40,13 +42,13 @@ export const asyncGetMovies = (searchValue, searchOption, sortOption) => {
 };
 
 // movieData actions
-const openMoviePage = (movieData) => ({
+const openMoviePage = (movieData: {}) => ({
     type: OPEN_MOVIE_PAGE,
     payload: movieData,
 });
 
-export const asyncGetMovieData = (movieId) => {
-    return dispatch => {
+export const asyncGetMovieData = (movieId: number) => {
+    return (dispatch: any) => {
         fetch(`${URL}movies/${movieId}`)
             .then((response) => response.json())
             .then((data) => dispatch(openMoviePage(data)));
@@ -54,18 +56,18 @@ export const asyncGetMovieData = (movieId) => {
 };
 
 // searchValue actions
-export const updateSearchValue = (value) => ({
+export const updateSearchValue = (value: string) => ({
     type: UPDATE_SEARCH_VALUE,
     payload: value,
 });
 
 // searchOption/sortOption actions
-export const updateSortOption = (value) => ({
+export const updateSortOption = (value: string) => ({
     type: UPDATE_SORT_OPTION,
     payload: value,
 });
 
-export const updateSearchOption = (value) => ({
+export const updateSearchOption = (value: string) => ({
     type: UPDATE_SEARCH_OPTION,
     payload: value,
 });

@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ToggleComponent from '../ToggleComponent';
@@ -10,12 +11,10 @@ import './SearchContainer.scss';
 import { SearchOptions } from '../../constants';
 import { updateSearchOption } from '../../actions';
 
-const propTypes = {
-    searchOption: PropTypes.string.isRequired,
-    toggleSearchOption: PropTypes.func.isRequired,
-};
-
-const SearchContainer = ({ searchOption, toggleSearchOption, }) => {
+const SearchContainer = ({ searchOption, toggleSearchOption, }: {
+    searchOption: string,
+    toggleSearchOption: (searchOption: string) => void,
+}) => {
     const handleToggle = ({ currentTarget: { value } }) => {
         toggleSearchOption(value);
     };
@@ -32,7 +31,6 @@ const SearchContainer = ({ searchOption, toggleSearchOption, }) => {
         </div>
     )
 };
-SearchContainer.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {

@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import EmptyList from '../EmptyList';
@@ -7,18 +8,15 @@ import MoviesList from '../MoviesList';
 
 import './ResultsList.scss';
 
-const propTypes = {
-    resultsAmount: PropTypes.number.isRequired,
-};
-
-const ResultsList = ({ resultsAmount, }) => {
+const ResultsList = ({ resultsAmount, }: {
+    resultsAmount: number,
+}) => {
     return (
-        <div className={`search-results ${!resultsAmount && 'no-items'}`}>
+        <div className={`search-results ${resultsAmount ? '' : 'no-items'}`}>
             {resultsAmount ? <MoviesList /> : <EmptyList />}
         </div>
     );
 };
-ResultsList.propTypes = propTypes;
 
 const mapStateToProps = state => {
     return {

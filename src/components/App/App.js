@@ -1,10 +1,11 @@
+// @flow
+
 import React from 'react';
 import {
     Switch,
     Route,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import ErrorBoundary from '../ErrorBoundary';
 import SearchPage from '../SearchPage';
@@ -14,23 +15,17 @@ import NotFound from '../NotFound';
 
 import './App.scss';
 
-const defaultProps = {
-    location: null,
-    context: null,
-};
-const propTypes = {
-    Router: PropTypes.func.isRequired,
-    location: PropTypes.string,
-    context: PropTypes.shape({
-        url: PropTypes.string,
-    }),
-    store: PropTypes.shape({
-        dispatch: PropTypes.func.isRequired,
-        getState: PropTypes.func.isRequired,
-    }).isRequired,
-};
-
-const App = ({ Router, location, context, store, }) => (
+const App = ({ Router, location, context, store, }: {
+    Router: any,
+    location: ?string,
+    context: ?{
+        url: ?string,
+    },
+    store: {
+        dispatch: any,
+        getState: any,
+    },
+}) => (
     <Provider store={store}>
         <Router location={location} context={context}>
             <ErrorBoundary>
@@ -46,7 +41,5 @@ const App = ({ Router, location, context, store, }) => (
         </Router>
     </Provider>
 );
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
 
 export default App;

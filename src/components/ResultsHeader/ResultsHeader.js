@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -10,19 +11,14 @@ import './ResultsHeader.scss';
 import { SortOptions } from '../../constants';
 import { updateSortOption } from '../../actions';
 
-const defaultProps = {
-    movieData: null,
-};
-const propTypes = {
-    resultsAmount: PropTypes.number.isRequired,
-    sortOption: PropTypes.string.isRequired,
-    toggleSortOption: PropTypes.func.isRequired,
-    movieData: PropTypes.shape({
-        genres: PropTypes.array.isRequired,
-    }),
-};
-
-const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption }) => {
+const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption, }: {
+    movieData: ?{
+        genres: string[],
+    },
+    resultsAmount: number,
+    sortOption: string,
+    toggleSortOption: (sortOption: string) => void,
+}) => {
     const location = useLocation();
     let renderHeader = null;
 
@@ -46,8 +42,6 @@ const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption 
         </div>
     )
 };
-ResultsHeader.defaultProps = defaultProps;
-ResultsHeader.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {
@@ -57,4 +51,3 @@ const mapStateToProps = (state) => {
     }
 };
 export default connect(mapStateToProps, { toggleSortOption: updateSortOption })(ResultsHeader);
-

@@ -1,5 +1,6 @@
+// @flow
+
 import React, { Fragment, useEffect  } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -9,15 +10,13 @@ import ResultsList from '../ResultsList';
 
 import { asyncGetMovies, updateSearchValue, } from '../../actions';
 
-const propTypes = {
-    searchOption: PropTypes.string.isRequired,
-    sortOption: PropTypes.string.isRequired,
-    searchValue: PropTypes.string.isRequired,
-    requestDefaultData: PropTypes.func.isRequired,
-    handleSearchValue: PropTypes.func.isRequired,
-};
-
-const SearchPage = ({ searchOption, sortOption, searchValue, requestDefaultData, handleSearchValue }) => {
+const SearchPage = ({ searchOption, sortOption, searchValue, requestDefaultData, handleSearchValue }: {
+    searchOption: string,
+    sortOption: string,
+    searchValue: string,
+    requestDefaultData: (searchValue: string, searchOption: string, sortOption: string) => void,
+    handleSearchValue: (searchValue: string) => void,
+}) => {
     const { value } = useParams();
 
 
@@ -37,7 +36,6 @@ const SearchPage = ({ searchOption, sortOption, searchValue, requestDefaultData,
         </Fragment>
     );
 };
-SearchPage.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {

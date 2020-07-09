@@ -1,16 +1,18 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './ToggleComponent.scss';
 
-const propTypes = {
-    selected: PropTypes.string.isRequired,
-    toggleType: PropTypes.string.isRequired,
-    options: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-    handleToggle: PropTypes.func.isRequired,
-};
-
-const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
+const ToggleComponent = ({ selected, toggleType, options, handleToggle, }: {
+    selected: string,
+    toggleType: string,
+    options: {
+        first: string,
+        second: string
+    },
+    handleToggle: () => void,
+}) => {
     const isChecked = option => selected === option;
 
     return (
@@ -40,6 +42,5 @@ const ToggleComponent = ({ selected, toggleType, options, handleToggle, }) => {
         </div>
     );
 };
-ToggleComponent.propTypes = propTypes;
 
 export default ToggleComponent;

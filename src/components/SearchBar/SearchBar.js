@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -7,12 +8,10 @@ import './SearchBar.scss';
 
 import { updateSearchValue } from '../../actions';
 
-const propTypes = {
-    handleSearchValue: PropTypes.func.isRequired,
-    searchValue: PropTypes.string.isRequired,
-};
-
-const SearchBar = ({ handleSearchValue, searchValue, }) => {
+const SearchBar = ({ handleSearchValue, searchValue, }: {
+    handleSearchValue: (searchValue: string) => void,
+    searchValue: string,
+}) => {
     const history = useHistory();
 
     const onSubmit = (event) => {
@@ -35,7 +34,6 @@ const SearchBar = ({ handleSearchValue, searchValue, }) => {
         </form>
     );
 };
-SearchBar.propTypes = propTypes;
 
 const mapStateToProps = state => {
     return {

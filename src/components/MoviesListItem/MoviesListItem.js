@@ -1,21 +1,20 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import './MoviesListItem.scss';
 
-const propTypes = {
-    movieData: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        release_date: PropTypes.string.isRequired,
-        genres: PropTypes.array.isRequired,
-    }).isRequired,
-};
-
-const MoviesListItem = ({ movieData }) => {
+const MoviesListItem = ({ movieData, }: {
+    movieData: {
+        id: number,
+        poster_path: string,
+        title: string,
+        release_date: string,
+        genres: string[],
+    },
+}) => {
     const history = useHistory();
 
     const handleClick = () => {
@@ -34,6 +33,5 @@ const MoviesListItem = ({ movieData }) => {
         </li>
     );
 };
-MoviesListItem.propTypes = propTypes;
 
 export default connect(null)(MoviesListItem);
