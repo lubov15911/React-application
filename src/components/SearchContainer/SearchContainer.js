@@ -2,26 +2,38 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { createUseStyles } from 'react-jss';
 
 import ToggleComponent from '../ToggleComponent';
 import SearchBar from '../SearchBar';
 
-import './SearchContainer.scss';
-
 import { SearchOptions } from '../../constants';
 import { updateSearchOption } from '../../actions';
+
+const useStyles = createUseStyles({
+    searchHeader: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '0 6em',
+    },
+    searchTitle: {
+        fontSize: '4em',
+        fontWeight: 'normal',
+    },
+});
 
 const SearchContainer = ({ searchOption, toggleSearchOption, }: {
     searchOption: string,
     toggleSearchOption: (searchOption: string) => void,
 }) => {
+    const classes = useStyles();
     const handleToggle = ({ currentTarget: { value } }) => {
         toggleSearchOption(value);
     };
 
     return (
-        <div className="search-header">
-            <h1 className="search-title">Find your movie</h1>
+        <div className={classes.searchHeader}>
+            <h1 className={classes.searchTitle}>Find your movie</h1>
             <SearchBar />
             <ToggleComponent
                 toggleType="Search "
