@@ -9,7 +9,9 @@
     "dev-server": "cross-env NODE_ENV=development node server/index.js",
     "test": "jest",
     "e2e": "cypress open",
-    "flow": "flow"
+    "flow": "flow",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "collectCoverage": true,
@@ -45,6 +47,12 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-flow": "^7.10.4",
     "@babel/preset-react": "^7.9.4",
+    "@dump247/storybook-state": "^1.6.1",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",

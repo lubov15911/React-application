@@ -14,6 +14,8 @@
 1) insert 'error' into search input
 2) to return to home page refresh the page
 
+## Storybook
+1) In order to open storybook run the following command: `npm run storybook --debug-webpack`
 
 ## Testing
 

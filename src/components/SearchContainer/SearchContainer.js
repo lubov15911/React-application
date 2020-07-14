@@ -27,7 +27,7 @@ const SearchContainer = ({ searchOption, toggleSearchOption, }: {
                 toggleType="Search "
                 options={SearchOptions}
                 selected={searchOption}
-                handleToggle={handleToggle}/>
+                handleToggle={handleToggle} />
         </div>
     )
 };
