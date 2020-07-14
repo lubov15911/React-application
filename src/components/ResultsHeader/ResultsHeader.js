@@ -1,28 +1,40 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
 
 import ToggleComponent from '../ToggleComponent';
 
-import './ResultsHeader.scss';
-
+import * as Colors from '../../constants/colors';
 import { SortOptions } from '../../constants';
 import { updateSortOption } from '../../actions';
 
-const defaultProps = {
-    movieData: null,
-};
-const propTypes = {
-    resultsAmount: PropTypes.number.isRequired,
-    sortOption: PropTypes.string.isRequired,
-    toggleSortOption: PropTypes.func.isRequired,
-    movieData: PropTypes.shape({
-        genres: PropTypes.array.isRequired,
-    }),
-};
+const useStyles = createUseStyles({
+    resultsHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '0 12em',
+        height: '7em',
+        backgroundColor: Colors.Gray,
 
-const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption }) => {
+        '& > p': {
+            fontSize: '1.5em',
+        }
+    },
+});
+
+const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption, }: {
+    movieData: ?{
+        genres: string[],
+    },
+    resultsAmount: number,
+    sortOption: string,
+    toggleSortOption: (sortOption: string) => void,
+}) => {
+    const classes = useStyles();
     const location = useLocation();
     let renderHeader = null;
 
@@ -35,10 +47,9 @@ const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption 
     const handleToggle = ({ currentTarget: { value } }) => toggleSortOption(value);
 
     return (
-        <div className="results-header">
+        <div className={classes.resultsHeader}>
             {renderHeader}
             <ToggleComponent
-                className="toggle1"
                 toggleType="Sort "
                 options={SortOptions}
                 selected={sortOption}
@@ -46,8 +57,6 @@ const ResultsHeader = ({ movieData, resultsAmount, sortOption, toggleSortOption 
         </div>
     )
 };
-ResultsHeader.defaultProps = defaultProps;
-ResultsHeader.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {
@@ -57,4 +66,3 @@ const mapStateToProps = (state) => {
     }
 };
 export default connect(mapStateToProps, { toggleSortOption: updateSortOption })(ResultsHeader);
-

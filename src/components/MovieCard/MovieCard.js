@@ -1,5 +1,6 @@
+// @flow
+
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -7,23 +8,18 @@ import './MovieCard.scss';
 
 import { asyncGetMovieData } from '../../actions';
 
-const defaultProps = {
-    movieData: null,
-};
-const propTypes = {
-    movieData: PropTypes.shape({
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        vote_average: PropTypes.number.isRequired,
-        release_date: PropTypes.string.isRequired,
-        tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number,
-        overview: PropTypes.string.isRequired,
-    }),
-    getMovieData: PropTypes.func.isRequired,
-};
-
-const MovieCard = ({ movieData, getMovieData }) => {
+const MovieCard = ({ movieData, getMovieData, }: {
+    movieData: {
+        poster_path: string,
+        title: string,
+        vote_average: number,
+        release_date: string,
+        tagline: string,
+        runtime: ?number,
+        overview: string,
+    },
+    getMovieData: (id: number) => void,
+}) => {
     const { id } = useParams();
 
     useEffect(() => {
@@ -59,8 +55,6 @@ const MovieCard = ({ movieData, getMovieData }) => {
         </div>
     );
 };
-MovieCard.defaultProps = defaultProps;
-MovieCard.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
     return {

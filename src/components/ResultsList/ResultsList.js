@@ -1,24 +1,36 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createUseStyles } from 'react-jss';
 
 import EmptyList from '../EmptyList';
 import MoviesList from '../MoviesList';
 
-import './ResultsList.scss';
+const useStyles = createUseStyles({
+    searchResults: {
+        padding: '6em',
+        minHeight: '55.5em',
+    },
+    noItems: {
+        composes: '$searchResults',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
-const propTypes = {
-    resultsAmount: PropTypes.number.isRequired,
-};
+const ResultsList = ({ resultsAmount, }: {
+    resultsAmount: number,
+}) => {
+    const classes = useStyles();
 
-const ResultsList = ({ resultsAmount, }) => {
     return (
-        <div className={`search-results ${!resultsAmount && 'no-items'}`}>
+        <div className={`${classes.searchResults} ${resultsAmount ? '' : classes.noItems}`}>
             {resultsAmount ? <MoviesList /> : <EmptyList />}
         </div>
     );
 };
-ResultsList.propTypes = propTypes;
 
 const mapStateToProps = state => {
     return {

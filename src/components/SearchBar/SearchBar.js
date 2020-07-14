@@ -1,18 +1,46 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
 
-import './SearchBar.scss';
+import * as Colors from '../../constants/colors';
 
 import { updateSearchValue } from '../../actions';
 
-const propTypes = {
-    handleSearchValue: PropTypes.func.isRequired,
-    searchValue: PropTypes.string.isRequired,
-};
+const useStyles = createUseStyles({
+    searchForm: {
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr',
+    },
+    searchFormElements: {
+        height: '2.8em',
+        borderRadius: 4,
+        border: 'none',
+        color: 'inherit',
+        boxSizing: 'border-box',
+        fontSize: '2em',
+    },
+    searchFormInput: {
+        composes: '$searchFormElements',
+        opacity: 0.7,
+        backgroundColor: Colors.TransparentDarkGray,
+        marginRight: '1em',
+        padding: '0 0.7em',
+    },
+    searchFormBtn: {
+        composes: '$searchFormElements',
+        backgroundColor: Colors.Pink,
+        cursor: 'pointer',
+    },
+});
 
-const SearchBar = ({ handleSearchValue, searchValue, }) => {
+const SearchBar = ({ handleSearchValue, searchValue, }: {
+    handleSearchValue: (searchValue: string) => void,
+    searchValue: string,
+}) => {
+    const classes = useStyles();
     const history = useHistory();
 
     const onSubmit = (event) => {
@@ -29,13 +57,12 @@ const SearchBar = ({ handleSearchValue, searchValue, }) => {
     const handleChange = ({ target: { value } }) => handleSearchValue(value);
 
     return (
-        <form className="search-form" onSubmit={onSubmit}>
-            <input type="text" placeholder="Search" value={searchValue} onChange={handleChange} />
-            <button type="submit"><p>Search</p></button>
+        <form className={classes.searchForm} onSubmit={onSubmit}>
+            <input className={classes.searchFormInput} type="text" placeholder="Search" value={searchValue} onChange={handleChange} />
+            <button className={classes.searchFormBtn} type="submit"><p>Search</p></button>
         </form>
     );
 };
-SearchBar.propTypes = propTypes;
 
 const mapStateToProps = state => {
     return {
