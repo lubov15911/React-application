@@ -1,43 +1,58 @@
-import React, { Fragment, useEffect  } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import HeaderContainer from '../HeaderContainer';
 import ResultsHeader from '../ResultsHeader';
 import ResultsList from '../ResultsList';
 
-import { asyncGetMovies, updateSearchValue, } from '../../actions';
+import { getMovies, updateSearchValue, } from '../../actions';
 
-const propTypes = {
-    searchOption: PropTypes.string.isRequired,
-    sortOption: PropTypes.string.isRequired,
-    searchValue: PropTypes.string.isRequired,
-    requestDefaultData: PropTypes.func.isRequired,
-    handleSearchValue: PropTypes.func.isRequired,
-};
+class SearchPage extends PureComponent {
+    static propTypes = {
+        searchOption: PropTypes.string.isRequired,
+        sortOption: PropTypes.string.isRequired,
+        searchValue: PropTypes.string.isRequired,
+        requestDefaultData: PropTypes.func.isRequired,
+        handleSearchValue: PropTypes.func.isRequired,
+        match: PropTypes.shape({
+            params: PropTypes.shape({
+                value: PropTypes.string.isRequired,
+            }),
+        }).isRequired,
+    };
 
-const SearchPage = ({ searchOption, sortOption, searchValue, requestDefaultData, handleSearchValue }) => {
-    const { value } = useParams();
+    UNSAFE_componentWillMount() {
+        const {
+            searchValue,
+            searchOption,
+            sortOption,
+            handleSearchValue,
+            requestDefaultData,
+            match: {
+                params: {
+                    value,
+                }
+            }
+        } = this.props;
 
-
-    useEffect(() => {
         if (searchValue !== value) {
             handleSearchValue(value);
         }
 
-        requestDefaultData(value, searchOption, sortOption);
-    });
+        requestDefaultData({ searchValue: value, searchOption, sortOption });
+    }
 
-    return (
-        <Fragment>
-            <HeaderContainer />
-            <ResultsHeader />
-            <ResultsList />
-        </Fragment>
-    );
-};
-SearchPage.propTypes = propTypes;
+    render() {
+        return (
+            <Fragment>
+                <HeaderContainer />
+                <ResultsHeader />
+                <ResultsList />
+            </Fragment>
+        );
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -47,4 +62,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { requestDefaultData: asyncGetMovies, handleSearchValue: updateSearchValue })(SearchPage);
+export default connect(mapStateToProps, { requestDefaultData: getMovies, handleSearchValue: updateSearchValue })(SearchPage);
