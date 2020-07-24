@@ -2,7 +2,18 @@ const path = require("path");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 
 module.exports = {
-    entry: ["babel-polyfill", "./src/index.js"],
+    mode: process.env.NODE_ENV,
+
+    output: {
+        path: path.resolve(__dirname, "public/"),
+        publicPath: "/public/",
+        filename: "bundle.js"
+    },
+
+    resolve: {
+        extensions: ["*", ".js", ".jsx"],
+    },
+
     module: {
         rules: [
             {
@@ -12,11 +23,6 @@ module.exports = {
             }
         ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
-    output: {
-        path: path.resolve(__dirname, "dist/"),
-        publicPath: "/dist/",
-        filename: "bundle.js"
-    },
+
     plugins: [new StylelintPlugin()]
 };

@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import './MovieCard.scss';
-
-import { asyncGetMovieData } from '../../actions';
 
 const defaultProps = {
     movieData: null,
@@ -20,41 +17,35 @@ const propTypes = {
         runtime: PropTypes.number,
         overview: PropTypes.string.isRequired,
     }),
-    getMovieData: PropTypes.func.isRequired,
 };
 
-const MovieCard = ({ movieData, getMovieData }) => {
-    const { id } = useParams();
-
-    useEffect(() => {
-        getMovieData(id);
-    });
-
-    if (movieData) {
-        const { poster_path, title, vote_average, tagline, release_date, runtime, overview, } = movieData;
+const MovieCard = ({ movieData }) => {
+    if (!movieData) {
         return (
             <div className="movie-card">
-                <img src={poster_path} alt="" className="movie-card-poster"/>
                 <div className="movie-card-info">
-                    <div className="movie-card-info-header">
-                        <h1 className="movie-card-info-title">{title}</h1>
-                        <div className="movie-card-info-rating"><span>{vote_average}</span></div>
-                    </div>
-                    <p className="movie-card-info-tagline">{tagline}</p>
-                    <div>
-                        <span className="movie-card-highlight">{release_date.slice(0, 4)}</span> year
-                        {runtime &&(<span className="movie-card-highlight">{runtime}</span>)}
-                        {runtime && 'min'}
-                    </div>
-                    <p className="movie-card-description">{overview}</p>
+                    Loading
                 </div>
             </div>
-        );
+        )
     }
+
+    const { poster_path, title, vote_average, tagline, release_date, runtime, overview, } = movieData;
     return (
         <div className="movie-card">
+            <img src={poster_path} alt="" className="movie-card-poster"/>
             <div className="movie-card-info">
-                Loading
+                <div className="movie-card-info-header">
+                    <h1 className="movie-card-info-title">{title}</h1>
+                    <div className="movie-card-info-rating"><span>{vote_average}</span></div>
+                </div>
+                <p className="movie-card-info-tagline">{tagline}</p>
+                <div>
+                    <span className="movie-card-highlight">{release_date.slice(0, 4)}</span> year
+                    {runtime &&(<span className="movie-card-highlight">{runtime}</span>)}
+                    {runtime && 'min'}
+                </div>
+                <p className="movie-card-description">{overview}</p>
             </div>
         </div>
     );
@@ -67,4 +58,5 @@ const mapStateToProps = (state) => {
         movieData: state.movieData,
     }
 };
-export default connect(mapStateToProps, { getMovieData: asyncGetMovieData })(MovieCard);
+
+export default connect(mapStateToProps)(MovieCard);

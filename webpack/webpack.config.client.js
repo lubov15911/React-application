@@ -1,9 +1,15 @@
 const path = require("path");
+const webpack = require('webpack');
 const merge = require("webpack-merge");
 
-const Config = require('./defaultWebpackConfig');
+const Config = require('./webpack.config.common');
 
 module.exports = merge(Config, {
+    name: 'client',
+    target: 'web',
+
+    entry: ["babel-polyfill", "./src/index.js"],
+
     module: {
         rules: [
             {
@@ -16,12 +22,7 @@ module.exports = merge(Config, {
             }
         ]
     },
-    watch: true,
-    devtool: "source-map",
-    devServer: {
-        contentBase: path.join(__dirname, "public/"),
-        port: 9000,
-        publicPath: "http://localhost:9000/dist/",
-        historyApiFallback: true,
-    }
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+    ],
 });

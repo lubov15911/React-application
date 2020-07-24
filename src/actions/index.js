@@ -1,75 +1,104 @@
+import { call, put, all, takeLatest } from 'redux-saga/effects';
+
 import { URL } from '../constants';
-import {
-    SAVE_FILM_LIST,
-    OPEN_MOVIE_PAGE,
-    UPDATE_SEARCH_VALUE,
-    UPDATE_SORT_OPTION,
-    UPDATE_SEARCH_OPTION,
-    RESET_PAGE_STATE,
-} from '../constants/actions';
+import * as Constants from '../constants/actions';
 
 const fetch = require('node-fetch');
 const encodeurl = require('encodeurl');
 
+// Internal functions
+function getURL({ searchValue, searchOption, sortOption }) {
+    let url = `${URL}movies`;
+    const queries = [];
+    if (sortOption) {
+        queries.push(`sortBy=${sortOption.toLowerCase().replace(' ', '_')}`);
+    }
+    if (searchValue) {
+        queries.push(`search=${searchValue}`);
+    }
+    if (searchOption) {
+        queries.push(`searchBy=${searchOption.toLowerCase()}`);
+    }
+
+    if (queries.length) {
+        url += `?${queries.join('&')}`;
+    }
+
+    return encodeurl(url);
+}
+
+// End Internal functions
+
 // films actions
 const saveFilmList = (list) => ({
-    type: SAVE_FILM_LIST,
+    type: Constants.SAVE_FILM_LIST,
     payload: list,
 });
 
-export const asyncGetMovies = (searchValue, searchOption, sortOption) => {
-    return dispatch => {
-        let url = `${URL}movies`;
-        const queries = [];
-        if (sortOption) {
-            queries.push(`sortBy=${sortOption.toLowerCase().replace(' ', '_')}`);
-        }
-        if (searchValue) {
-            queries.push(`search=${searchValue}`);
-        }
-        if (searchOption) {
-            queries.push(`searchBy=${searchOption.toLowerCase()}`);
-        }
+export const getMovies = (value) => ({
+    type: Constants.GET_MOVIES,
+    payload: value,
+});
 
-        if (queries.length) {
-            url += `?${queries.join('&')}`;
-        }
+// Saga
+export function* asyncGetMovies(action) {
+    const response = yield call(fetch, getURL(action.payload));
+    const data = yield response.json();
 
-        fetch(encodeurl(url)).then((response) => response.json()).then((data) => dispatch(saveFilmList(data.data)));
-    }
-};
+    yield put(saveFilmList(data.data));
+}
+
+export function* watchGetMovies() {
+    yield takeLatest(Constants.GET_MOVIES, asyncGetMovies);
+}
 
 // movieData actions
 const openMoviePage = (movieData) => ({
-    type: OPEN_MOVIE_PAGE,
+    type: Constants.OPEN_MOVIE_PAGE,
     payload: movieData,
 });
 
-export const asyncGetMovieData = (movieId) => {
-    return dispatch => {
-        fetch(`${URL}movies/${movieId}`)
-            .then((response) => response.json())
-            .then((data) => dispatch(openMoviePage(data)));
-    }
-};
+export const getMovieData = (value) => ({
+    type: Constants.GET_MOVIE_DATA,
+    payload: value,
+});
+
+// Saga
+export function* asyncGetMovieData(action) {
+    const response = yield call(fetch, `${URL}movies/${action.payload}`);
+    const data = yield response.json();
+
+    yield put(openMoviePage(data));
+}
+
+export function* watchGetMovieData() {
+    yield takeLatest(Constants.GET_MOVIE_DATA, asyncGetMovieData);
+}
+
+export function* appSaga() {
+    yield all([
+        watchGetMovies(),
+        watchGetMovieData(),
+    ]);
+}
 
 // searchValue actions
 export const updateSearchValue = (value) => ({
-    type: UPDATE_SEARCH_VALUE,
+    type: Constants.UPDATE_SEARCH_VALUE,
     payload: value,
 });
 
 // searchOption/sortOption actions
 export const updateSortOption = (value) => ({
-    type: UPDATE_SORT_OPTION,
+    type: Constants.UPDATE_SORT_OPTION,
     payload: value,
 });
 
 export const updateSearchOption = (value) => ({
-    type: UPDATE_SEARCH_OPTION,
+    type: Constants.UPDATE_SEARCH_OPTION,
     payload: value,
 });
 
 export const resetState = () => ({
-    type: RESET_PAGE_STATE
+    type: Constants.RESET_PAGE_STATE
 });
