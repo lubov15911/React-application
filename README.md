@@ -1,5 +1,7 @@
 # React-application
 
+Hi there!
+
 1) Run `npm install`
 
 2) To build: `npm run build[:prod]`
